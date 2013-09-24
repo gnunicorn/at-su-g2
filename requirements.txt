@@ -4,4 +4,5 @@ MarkupSafe==0.18
 Werkzeug==0.9.4
 itsdangerous==0.23
 suds==0.4
+sure==1.2.2
 wsgiref==0.1.2
