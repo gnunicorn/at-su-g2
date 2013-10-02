@@ -33,5 +33,5 @@ We are using:
  * Flask for Web Handling: http://flask.pocoo.org/
  * SQLAlchemy for Database Access: http://docs.sqlalchemy.org/en/rel_0_8/
  * Alembic for Database migrations: https://alembic.readthedocs.org/en/latest/index.html
- * Twitter Bootstrap as UI-Framework: http://getbootstrap.com/2.3.2/
+ * Twitter Bootstrap as UI-Framework: http://getbootstrap.com/
  * with jQuery for Interaction: http://api.jquery.com/
