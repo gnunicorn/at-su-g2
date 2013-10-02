@@ -5,7 +5,13 @@
    ========================================================================== */
 
 
+.upgrade-box {
+	text-align: center;
+}
 
+.upgrade-box.active {
+	background-color: red;
+}
 
 
 
