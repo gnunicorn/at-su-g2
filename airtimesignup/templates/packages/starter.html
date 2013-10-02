@@ -14,31 +14,13 @@
 		</div>
 	</div>
 
-	<h2>Upgrades</h2>
-	
-	<h3>Extra Streaming Capabilities</h3>
-	<p>Included with this package is expert support level "bronze": 10 Simultaneous listeners per stream at up to 128Kbps. Here you can select upgrade to increase the amount of listeners</p>
-	<div class="row upgrade-selection" data-upgrade-name="extra_streaming" >
-		<div data-upgrade-value="silver" class="upgrade-box col-md-offset-1 col-md-3">
-			<span class="title">Silver</span>
-			<p class="desc">up to <span class="highlight">50</span> listeners</p>
-			<p><span class="surplus">+ 17,48 $/m</span></p>
-		</div>
+{% include "packages/_upgrades.html" %}
 
-		<div data-upgrade-value="gold" class="upgrade-box col-md-3">
-			<span class="title">Gold</span>
-			<p class="desc">up to <span class="highlight">50</span> listeners</p>
-			<p><span class="surplus">+ 17,48 $/m</span></p>
-		</div>
-
-		<div data-upgrade-value="premium" class="upgrade-box col-md-3">
-			<span class="title">Premium</span>
-			<p class="desc">up to <span class="highlight">50</span> listeners</p>
-			<p><span class="surplus">+ 17,48 $/m</span></p>
-		</div>
-
-	</div>
-<form>
+<form method="POST" action="/checkout">
+	<input type="hidden" name="package" value="starter" />
 	<input type="hidden" name="extra_streaming" id="extra_streaming" value="" />
+
+	<input type="hidden" name="expert_support" id="expert_support" value="" />
+	<button class="pull-right btn btn-primary btn-lg">continue >> </button>
 </form>
 {% endblock %}
