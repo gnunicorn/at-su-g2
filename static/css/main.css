@@ -1,12 +1,32 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+/* Colors */
+/* line 10, sass/main.scss */
 .upgrade-box {
   text-align: center; }
 
+/* line 14, sass/main.scss */
 .upgrade-box.active {
   background-color: red; }
 
+/* line 18, sass/main.scss */
+.best-value {
+  background: #ff5d1a;
+  display: inline-block;
+  height: 60px;
+  width: 60px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  -ms-border-radius: 40px;
+  -o-border-radius: 40px;
+  border-radius: 40px;
+  text-indent: -9999px;
+  position: absolute;
+  top: 110px;
+  right: 400px; }
+
+/* line 30, sass/main.scss */
 .info {
   background: url("img/icon-info.png");
   cursor: help;
@@ -15,6 +35,7 @@
   text-indent: -9999px;
   width: 14px; }
 
+/* line 39, sass/main.scss */
 .panel {
   position: absolute;
   z-index: 2;

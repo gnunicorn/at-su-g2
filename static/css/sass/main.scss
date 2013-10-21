@@ -1,6 +1,10 @@
+@import "compass/css3";
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+/* Colors */
+$hero: #FF5D1A;
 
 
 .upgrade-box {
@@ -9,6 +13,18 @@
 
 .upgrade-box.active {
 	background-color: red;
+}
+
+.best-value {
+   background: $hero;
+   display: inline-block;
+   height: 60px;
+   width: 60px;
+   @include border-radius(40px);
+   text-indent: -9999px;
+   position: absolute;
+   top: 110px;
+   right: 400px;
 }
 
 .info {
