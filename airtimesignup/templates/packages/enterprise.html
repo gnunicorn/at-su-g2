@@ -1,23 +1,23 @@
 {% extends "layout.html" %}
-{% block title %}Starter Package{% endblock %}
+{% block title %}Enterprise Package{% endblock %}
 
 {% block body %}
 
 	<h1>Your selection</h1>
 	<div class="row">
 		<div class="col-md-offset-1 col-md-8">
-			<h2>Airtime Pro Starter <a href="/"><small>change</small></a></h2>
-			<p>First month free, 10 GB Storage included</p>
+			<h2>Airtime Pro Enterprise <a href="/"><small>change</small></a></h2>
+			<p>500 GB Storage and 3 simultaneous streams with different bitrates included</p>
 		</div>
 		<div class="col-md-2">
-		 <h3>24,95$/m</h3>
+		 <h3>149,95$/m</h3>
 		</div>
 	</div>
 
 {% include "packages/_upgrades.html" %}
 
 <form method="POST" action="/checkout">
-	<input type="hidden" name="package" value="starter" />
+	<input type="hidden" name="package" value="enterprise" />
 	<input type="hidden" name="extra_streaming" id="extra_streaming" value="" />
 
 	<input type="hidden" name="expert_support" id="expert_support" value="" />
