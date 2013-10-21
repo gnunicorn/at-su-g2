@@ -2,13 +2,186 @@
 {% block title %}New app{% endblock %}
 
 {% block body %}
-    <h1>Please choose your Airtime Package</h1>
-    <p>
-	    <ul>
-	    	<li><a href="/packages/starter">Starter</a></li>
-	    	<li><a href="/packages/plus">Plus</a></li>
-	    	<li><a href="/packages/premium">Premium</a></li>
-	    	<li><a href="/packages/enterprise">Enterprise</a></li>
-	    </ul>
-    </p>
+   <h1>Please choose your Airtime Package</h1>
+   <h3>Cloud-hosted software, storage and streaming - everything you need to start a radio station.</h3>
+   <table cellpadding="0" cellspacing="0">
+      <thead>
+         <tr>
+            <th scope="row"></th>
+            <th scope="col">Starter</th>
+            <th scope="col">Plus</th>
+            <th scope="col">Premium</th>
+            <th scope="col">Enterprise</th>
+         </tr>
+      </thead>
+
+      <tbody>
+         <tr>
+            <th scope="row">
+               Price
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">What are my payment options?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>Billing is monthly. You can cancel at any point and you will only be billed for the current month, and not again after this point. Users can easily upgrade and downgrade package elements without cost. Starter is free for the first month, after this you will be billed. Cancel before then, and you will not be billed.</small>
+                  </div>
+               </div>
+            </th>
+            <td><h5>$ 24.95 <small>USD / month</small></h5></td>
+            <td><h5>$ 49.95 <small>USD / month</small></h5></td>
+            <td class="best-value"><h5>$ 74.95 <small>USD / month</small></h5></td>
+            <td><h5>$ 149.95 <small>USD / month</small></h5></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Perfect for...
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Who can use it?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>Airtime Pro is perfect for broadcasting radio via the internet but it's also used by a variety of organisations to stream 24/7 audio. Newspapers, shopping malls, music festivals and venues, podcasters, arts organisations, advertisers, PR agencies and more.</small>
+                  </div>
+               </div>
+            </th>
+            <td><small>Internet radio, music producers, shopping malls, nightclubs, event promotion</td>
+            <td><small>Newspapers, faith-based broadcast, educational institutions</td>
+            <td><small>Community & commercial radio stations (FM, AM, online, digital or satellite) </td>
+            <td><small>Radio networks, newswires, national or international media organisations</td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Cloud audio storage
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">What's cloud storage?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>We store your audio in the cloud, which means anyone from your team can upload, download and access your audio files archive via the web. This removes the need for you to maintain a dedicated storage server and gives your entire operation 24/7 access to your archive wherever they are. Of course there's no lock-in, you can download your archive at any time.</small>
+                  </div>
+               </div>
+            </th>
+            <td>10GB <small>(5 days of audio)</small></td>
+            <td>30GB <small>(20 days of audio)</small></td>
+            <td>150GB <small>(85 days of audio)</small></td>
+            <td>500GB <small>(320 days of audio)</small></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Simultaneous streams<br/>with different bitrates
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">What does this mean?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>Radio stations often broadcast the same content at different bandwidths e.g. one stream for high-bandwidth web connections and one for low-bandwidth mobile connections. This number refers to the maximum number of different stream bandwidths your hosting will allow at any one time.</small>
+                  </div>
+               </div>
+            </th>
+            <td>1</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Simultaneous listeners
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">What does this mean?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>This is the amount of people who can listen to your stream at any one time. Upgrade to 50, 100, 500 or 1000, or use your own streaming solution with another provider.</small>
+                  </div>
+               </div>
+            </th>
+            <td>10 <small>(upgradable)</small></td>
+            <td>10 <small>(upgradable)</small></td>
+            <td>10 <small>(upgradable)</small></td>
+            <td>10 <small>(upgradable)</small></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Easy web streaming
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">What's streaming?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>All radio automation software needs a streaming provider if you want people to listen online. Airtime Pro lets you choose any provider and is ready out-of-the-box to stream to Icecast and SHOUTcast. See below for our very competitive streaming rates for a one-provider solution. Let us sort everything and save money and stress.</small>
+                  </div>
+               </div>
+            </th>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Unlimited admin <br/> accounts
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">How many people can use Airtime Pro?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>As many as you like. Airtime Pro is not 'pay per seat'. As many journalists, DJs, technicians or team members can be assigned different roles and rights and access Airtime Pro via the web.</small>
+                  </div>
+               </div>
+            </th>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               Embeddable website <br />player
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-heading">
+                     <h3 class="panel-title">Can people listen on my site?</h3>
+                  </div>
+                  <div class="panel-body">
+                     <small>Airtime Pro features four standalone website widgets. These let your website visitors tune into the stream, see what's playing and view the upcoming schedule. Copy the code and embed to your site. Easy!</small>
+                  </div>
+               </div>
+            </th>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+         </tr>
+         <tr>
+            <th scope="row">
+               30% SoundCloud<br />discount
+               <span class="info">Info</span>
+               <div class="panel panel-info hidden">
+                  <div class="panel-body">
+                     <small>Automatically upload broadcasts to SoundCloud. Allow people to listen again, comment, and share your shows via Twitter and Facebook without doing a thing. All Airtime Pro customers get 30% off a premium SoundCloud account.</small>
+                  </div>
+               </div>
+            </th>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+            <td><span class="glyphicon glyphicon-ok"></span></td>
+         </tr>
+         <tr>
+            <th scope="row"></th>
+            <td><a class="btn btn-primary" href="/packages/starter">Start trial</a></td>
+            <td><a class="btn btn-primary" href="/packages/plus">Order now</a></td>
+            <td><a class="btn btn-primary" href="/packages/premium">Order now</a></td>
+            <td><a class="btn btn-primary" href="/packages/enterprise">Order now</a></td>
+         </tr>
+      </tbody>
+   </table>
 {% endblock %}
