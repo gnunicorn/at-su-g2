@@ -1,0 +1,7 @@
+.info {
+  background: url("/static/img/icon-info");
+  cursor: help;
+  display: inline-block;
+  height: 14px;
+  text-indent: -9999px;
+  width: 14px; }

@@ -1,28 +1,22 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
-
 .upgrade-box {
-	text-align: center;
-}
+  text-align: center; }
 
 .upgrade-box.active {
-	background-color: red;
-}
+  background-color: red; }
 
+.info {
+  background: url("img/icon-info.png");
+  cursor: help;
+  display: inline-block;
+  height: 14px;
+  text-indent: -9999px;
+  width: 14px; }
 
-
-
-
-
-
-
-
-
-
-
-
-
+.panel {
+  position: absolute;
+  z-index: 2;
+  width: 300px;
+  left: 200px; }
