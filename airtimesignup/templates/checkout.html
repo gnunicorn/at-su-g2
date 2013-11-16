@@ -7,35 +7,30 @@
 
     <h2>Your Configuration</h2>
 
-    	{% if package == "plus" %}
-    		<h3> Plus</h3>
-    	{% elif package == "premium" %}
-    		<h3> Premium</h3>
-    	{% elif package == "enterprise" %}
-    		<h3> Premium</h3>
-    	{% else %}
-    		<h3> Starter</h3>
-    	{% endif %}
+    	
+    	<h3>{{package.name}} - {{package.price}} $/m <a href="/packages">change</a></h3>
 
     	{% if extra_streaming %}
-    		{% if extra_streaming == "silver" %}
-    			<h3>+ Silver Streaming</h3>
-    		{% elif extra_streaming == "gold" %}
-    			<h3>+ Gold Streaming</h3>
-    		{% elif extra_streaming == "premium" %}
-				<h3>+ Premium Streaming</h3>
-    		{% endif %}
+    		<h3>+ {{extra_streaming.name}} - {{extra_streaming.price}} $/m</h3>
     	{% endif %}
 
     	{% if expert_support %}
-    		{% if expert_support == "silver" %}
-    			<h3>+ Silver Expert Support</h3>
-    		{% elif expert_support == "gold" %}
-    			<h3>+ Gold Expert Support</h3>
-    		{% elif expert_support == "platinum" %}
-				<h3>+ Premium Expert Support</h3>
-    		{% endif %}
+    		<h3>+ {{expert_support.name}} - {{expert_support.price}} $/m</h3>
     	{% endif %}
+
+    <hr>
+    <p>
+    	SUM: {{sum_total}} $/m<br>
+    	<div id="with-vat">
+	    	VAT: {{vat}} $/m<br>
+	    	TOTAL: {{total}} $/m<br>
+    	</div>
+    	<div id="without-vat" style="display:none">
+	    	VAT: 0,00 $/m<br>
+	    	TOTAL: {{sum_total}} $/m<br>
+    	</div>
+
+    </p>
 
     <h2>Billing details</h2>
         {% if not current_user.is_authenticated() %}        
@@ -125,6 +120,8 @@
 			        $this.removeData('timer');
 			        $.getJSON("/checkvat/" + $('#vatfield').val(), function(res) {
 			        		$target.find(".loading").hide();
+			        		$("#without-vat").hide();
+			        		$("#with-vat").show();
 
 			        		if (! res.valid){
 			        			$target.find(".invalid").show();
@@ -134,7 +131,8 @@
 			        			var address = $("<address>").html(res.name + "<br>" + res.address.replace("\n", "<br>"))
 			        			success.append(address)
 			        			$target.find(".fine").show().html(success);
-
+			        			$("#without-vat").fadeIn(1000);
+			        			$("#with-vat").hide();
 			        		}
 			        });
 			    }, delay));

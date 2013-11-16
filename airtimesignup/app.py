@@ -10,6 +10,8 @@ from airtimesignup.database import db_session
 from airtimesignup.checkvat import get_vat_info
 from airtimesignup import config
 
+import math
+
 app = Flask(__name__, static_folder='../static')
 
 
@@ -17,19 +19,36 @@ app = Flask(__name__, static_folder='../static')
 def checkout():
     if request.method == "POST":
         session["checkout_context"] = {
-            "package": request.form.get("package", "starter"),
-            "expert_support": request.form.get("expert_support", ""),
-            "extra_streaming": request.form.get("extra_streaming", ""),
+            "package": config.PACKAGES[request.form.get("package", "starter")],
+            "expert_support": config.EXTRAS["expert_support"].get(request.form.get("expert_support", ""), ""),
+            "extra_streaming": config.EXTRAS["extra_streaming"].get(request.form.get("extra_streaming", ""), ""),
         }
         return redirect(url_for("checkout"))
+
     if not "checkout_context" in session or not session["checkout_context"]:
         return redirect("/packages")
-    return render_template('checkout.html', **session["checkout_context"])
+
+    context = session["checkout_context"]
+    total = sum([context[x]["price"]
+                for x in ('package', 'expert_support', 'extra_streaming')
+                if context.get(x, None)])
+    context["sum_total"] = total
+    context["vat"] = math.ceil(total * 19) / 100.0
+    context["total"] = math.ceil(total * 119) / 100.0
+    return render_template('checkout.html', **context)
+
+
+@app.route("/packages")
+def show_packages():
+    session["checkout_context"] = {}
+    return render_template('packages.html',
+                           packages=config.PACKAGES)
 
 
 @app.route("/packages/<string:package>")
 def show_package(package):
-    return render_template('packages/{0}.html'.format(package))
+    return render_template('packages/{0}.html'.format(package),
+                           package=config.PACKAGES[package])
 
 
 @app.route("/checkvat/<string:vat>")
