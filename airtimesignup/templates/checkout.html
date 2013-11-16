@@ -2,6 +2,7 @@
 {% block title %}Checkout{% endblock %}
 
 {% block body %}
+	<form action="/confirm" class="checkout">
     <h1>Checkout</h1>
 
     <h2>Your Configuration</h2>
@@ -37,15 +38,107 @@
     	{% endif %}
 
     <h2>Billing details</h2>
-        {% if current_user.is_authenticated() %}
-            <button id="browserid-logout">Logout</button>
-        {% else %}        
+        {% if not current_user.is_authenticated() %}        
             <button id="browserid-login" class="btn btn-primary">Sign in</button> using <a href="http://www.mozilla.org/en-US/persona/" target="_blank">mozilla persona</a>
         {% endif %}
 
-    {% if not current_user.is_authenticated() %}
+        {% if current_user.is_authenticated() %}
+        <div
+        	<div class="col-md-4">
+	        	<dl class="dl-horizontal">
+		        	<dt>User Account</dt>
+		        	<dd>{{current_user.email}} <a id="browserid-logout">change</a></dd>
+
+		        	<dt>Bill to</dt>
+		        	<dd><input type="radio" name="bill-selector" value="vat" checked="checked"> VAT Nr.<br>
+		        		<input id="vatfield" type="text" name="vat-nr" disabled="disabled" class="disabled"> <br>
+		        	<input type="radio" name="bill-selector" value="address" > Address<br>
+		        	<textarea id="addressfield" name="address" disabled="disabled" class="disabled"></textarea>
+		        		
+		        	</dd>
+	        	</dl>
+        	</div>
+        	<div class="col-md-4" id="vat-test">
+        		<h3 class="loading" style="display:none">loading</h3>
+
+        		<div class="loaded fine">
+        		</div>
+        		<div class="loaded invalid">
+        			<div class="alert alert-danger">
+        				<strong>Failure</strong> this VAT is not valid.
+        			</div>
+        		</div>
+
+        	</div>
+        </div>
+
+        {% endif %}
+        </form>
+       
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
         <script src="https://login.persona.org/include.js" type="text/javascript"></script>
         <script type="text/javascript">{{ auth_script|safe }}</script>
-    {% endif %}
+
+        <script type="text/javascript">
+        $(function(){
+        	$("input:radio").change(function(){
+        		var selected = $("input:radio[name=bill-selector]:checked" ).val();
+        		if (selected === "address") {
+        			$("#addressfield").attr("disabled", false)
+        			$("#addressfield").removeClass("disabled")
+
+        			$("#vatfield").attr("disabled", "disabled")
+        			$("#vatfield").addClass("disabled")
+        		} else {
+        			$("#vatfield").attr("disabled", false)
+        			$("#vatfield").removeClass("disabled")
+
+        			$("#addressfield").attr("disabled", "disabled")
+        			$("#addressfield").addClass("disabled")
+        		}	
+        	}).change();
+
+	        $('#vatfield').bind('keyup', function(){
+			    var $this = $(this),
+			    	value = $.trim($(this).val()),
+			    	$target = $("#vat-test"),
+			    	delay = 1500; // 1.5 seconds delay after last input
+
+			   	console.log($this.data("last-tested"));
+
+			    //only continue if it actually changed
+			    if (value === $this.data("last-tested")) {
+			    	return;
+			    }
+			    $this.data("last-tested", value)
+
+			    // only continue if there is some data in it
+			    $target.find(".loaded").hide();
+			    if (!value){
+			    	return
+			    }
+
+			    $target.find(".loading").show();
+
+			    clearTimeout($this.data('timer'));
+			    $this.data('timer', setTimeout(function(){
+			        $this.removeData('timer');
+			        $.getJSON("/checkvat/" + $('#vatfield').val(), function(res) {
+			        		$target.find(".loading").hide();
+
+			        		if (! res.valid){
+			        			$target.find(".invalid").show();
+			        		} else {
+			        			var success = $('<div class="alert alert-success"><strong>VAT found</strong><br></div>')
+
+			        			var address = $("<address>").html(res.name + "<br>" + res.address.replace("\n", "<br>"))
+			        			success.append(address)
+			        			$target.find(".fine").show().html(success);
+
+			        		}
+			        });
+			    }, delay));
+			});
+        });
+        </script>
 {% endblock %}

@@ -36,7 +36,7 @@ def show_package(package):
 def checkvat(vat):
     valid, info = get_vat_info(vat)
     if not valid:
-        jsonify({"valid": False})
+        return jsonify({"valid": False})
     return jsonify({"valid": True,
                     "name": info.name,
                     "country": info.countryCode,

@@ -41,3 +41,7 @@
   z-index: 2;
   width: 300px;
   left: 200px; }
+
+form.checkout .loaded {
+  display: none;
+}
