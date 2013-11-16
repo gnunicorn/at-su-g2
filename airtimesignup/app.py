@@ -1,5 +1,6 @@
 #* encoding=utf-8
-from flask import Flask, render_template, jsonify
+from flask import (Flask, render_template, jsonify, request,
+                   session, redirect, url_for)
 from flask.ext.login import LoginManager
 from flask.ext.browserid import BrowserID
 
@@ -14,7 +15,16 @@ app = Flask(__name__, static_folder='../static')
 
 @app.route("/checkout", methods=['GET', 'POST'])
 def checkout():
-    return render_template('checkout.html')
+    if request.method == "POST":
+        session["checkout_context"] = {
+            "package": request.form.get("package", "starter"),
+            "expert_support": request.form.get("expert_support", ""),
+            "extra_streaming": request.form.get("extra_streaming", ""),
+        }
+        return redirect(url_for("checkout"))
+    if not "checkout_context" in session or not session["checkout_context"]:
+        return redirect("/packages")
+    return render_template('checkout.html', **session["checkout_context"])
 
 
 @app.route("/packages/<string:package>")
@@ -45,7 +55,6 @@ def index():
 @app.route("/<string:template>")
 def show_template(template):
     return render_template(template + '.html')
-
 
 
 #### APP CONFIGURATION
