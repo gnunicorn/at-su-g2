@@ -3,5 +3,9 @@
 
 {% block body %}
     <h1>Checkout</h1>
-    This is the checkout page. Hello {{ username }}.
+        {% if current_user.is_authenticated() %}
+            <button id="browserid-logout">Logout</button>
+        {% else %}        
+            <button id="browserid-login">Login</button>
+        {% endif %}
 {% endblock %}

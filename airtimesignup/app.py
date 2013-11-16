@@ -24,9 +24,7 @@ def show():
 
 @app.route("/checkout", methods=['GET', 'POST'])
 def checkout():
-    if 'username' in session:
-        return render_template('checkout.html', username=session['username'])
-    return redirect(url_for('login'))
+    return render_template('checkout.html')
 
 
 @app.route("/packages/<string:package>")

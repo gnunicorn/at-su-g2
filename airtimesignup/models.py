@@ -7,3 +7,15 @@ class User(Base):
     id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
     fullname = Column(Unicode)
     email = Column(Unicode)
+
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.id
