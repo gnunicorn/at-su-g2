@@ -6,6 +6,7 @@ from sqlalchemy import engine_from_config, pool
 from logging.config import fileConfig
 from airtimesignup.app import app
 from airtimesignup import app
+from airtimesignup import models
 from airtimesignup import config as appconfig, database
 
 # this is the Alembic Config object, which provides
