@@ -7,6 +7,7 @@ VIES_URL = 'http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl'
 
 client = Client(VIES_URL, proxy=getproxies())
 
+
 def get_vat_info(vat):
     code = vat[:2]
     number = vat[2:]
