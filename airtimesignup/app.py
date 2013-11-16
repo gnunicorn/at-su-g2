@@ -1,25 +1,15 @@
-from flask import Flask, render_template, jsonify, session, request, url_for, redirect
+#* encoding=utf-8
+from flask import Flask, render_template, jsonify
 from flask.ext.login import LoginManager
 from flask.ext.browserid import BrowserID
 
+from airtimesignup.user_management import (get_user_by_id,
+                                           get_user_from_browserid)
 from airtimesignup.database import db_session
 from airtimesignup.checkvat import get_vat_info
-
-from airtimesignup.user_management import get_user_from_browserid, get_user_by_id
-
+from airtimesignup import config
 
 app = Flask(__name__, static_folder='../static')
-
-
-## Database teardown
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    db_session.remove()
-
-
-@app.route("/")
-def show():
-    return render_template('index.html')
 
 
 @app.route("/checkout", methods=['GET', 'POST'])
@@ -45,9 +35,31 @@ def checkvat(vat):
                     })
 
 
-# This should go into a config file
-app.secret_key = 'ChangeThis'
+# index
+@app.route("/")
+def index():
+    return render_template('index.html')
 
+
+# default fallback
+@app.route("/<string:template>")
+def show_template(template):
+    return render_template(template + '.html')
+
+
+
+#### APP CONFIGURATION
+
+## Database teardown
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
+
+# This should go into a config file
+app.secret_key = config.SESSION_SECRET
+
+# Add Login Management
 login_manager = LoginManager()
 login_manager.user_loader(get_user_by_id)
 login_manager.init_app(app)
