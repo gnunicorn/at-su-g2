@@ -6,39 +6,70 @@
 /* Colors */
 $hero: #FF5D1A;
 
+/* Fonts */
+$font-size-highlight: 22px;
+$font-size-price: 18px;
+
+table.packages {
+   position: relative;
+   .best-value {
+      background: $hero;
+      display: inline-block;
+      height: 60px;
+      width: 60px;
+      @include border-radius(40px);
+      text-transform: uppercase;
+      text-align: center;
+      @include rotate(-30deg);
+      padding: 7px 0 0;
+      color: #fff;
+      position: absolute;
+      top: -2em;
+   }
+   .info {
+      background: url('img/icon-info.png');
+      cursor: help;
+      display: inline-block;
+      height: 14px;
+      text-indent: -9999px;
+      width: 14px;
+   }
+   .panel {
+      position: absolute;
+      z-index: 2;
+      width: 300px;
+      left: 200px;
+   }
+}
 
 .upgrade-box {
 	text-align: center;
+   border: 1px solid #000;
+   padding: 15px 0;
+
+   .title { font-size: $font-size-highlight; }
+
+   .highlight {
+      font-size: $font-size-highlight;
+      display: block;
+   }
+
+   &:last-child .highlight { padding: 20px 0 0; }
+
+   .surplus { font-size: $font-size-price; }
+
+   ul {
+      list-style-type: none;
+      padding: 0;
+   }
+
+   &:first-child ul { padding: 0 0 40px; }
 }
 
 .upgrade-box.active {
-	background-color: red;
+	background-color: $hero;
 }
 
-.best-value {
-   background: $hero;
-   display: inline-block;
-   height: 60px;
-   width: 60px;
-   @include border-radius(40px);
-   text-indent: -9999px;
-   position: absolute;
-   top: 110px;
-   right: 400px;
-}
-
-.info {
-   background: url('img/icon-info.png');
-   cursor: help;
-   display: inline-block;
-   height: 14px;
-   text-indent: -9999px;
-   width: 14px;
-}
-
-.panel {
-   position: absolute;
-   z-index: 2;
-   width: 300px;
-   left: 200px;
+form.checkout .loaded {
+   display: none;
 }

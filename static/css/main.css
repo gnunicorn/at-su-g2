@@ -2,16 +2,12 @@
    Author's custom styles
    ========================================================================== */
 /* Colors */
-/* line 10, sass/main.scss */
-.upgrade-box {
-  text-align: center; }
-
-/* line 14, sass/main.scss */
-.upgrade-box.active {
-  background-color: red; }
-
-/* line 18, sass/main.scss */
-.best-value {
+/* Fonts */
+/* line 13, sass/main.scss */
+table.packages {
+  position: relative; }
+/* line 15, sass/main.scss */
+table.packages .best-value {
   background: #ff5d1a;
   display: inline-block;
   height: 60px;
@@ -21,27 +17,62 @@
   -ms-border-radius: 40px;
   -o-border-radius: 40px;
   border-radius: 40px;
-  text-indent: -9999px;
+  text-transform: uppercase;
+  text-align: center;
+  -webkit-transform: rotate(-30deg);
+  -moz-transform: rotate(-30deg);
+  -ms-transform: rotate(-30deg);
+  -o-transform: rotate(-30deg);
+  transform: rotate(-30deg);
+  padding: 7px 0 0;
+  color: #fff;
   position: absolute;
-  top: 110px;
-  right: 400px; }
-
-/* line 30, sass/main.scss */
-.info {
+  top: -2em; }
+/* line 29, sass/main.scss */
+table.packages .info {
   background: url("img/icon-info.png");
   cursor: help;
   display: inline-block;
   height: 14px;
   text-indent: -9999px;
   width: 14px; }
-
-/* line 39, sass/main.scss */
-.panel {
+/* line 37, sass/main.scss */
+table.packages .panel {
   position: absolute;
   z-index: 2;
   width: 300px;
   left: 200px; }
 
+/* line 45, sass/main.scss */
+.upgrade-box {
+  text-align: center;
+  border: 1px solid #000;
+  padding: 15px 0; }
+/* line 50, sass/main.scss */
+.upgrade-box .title {
+  font-size: 22px; }
+/* line 52, sass/main.scss */
+.upgrade-box .highlight {
+  font-size: 22px;
+  display: block; }
+/* line 57, sass/main.scss */
+.upgrade-box:last-child .highlight {
+  padding: 20px 0 0; }
+/* line 59, sass/main.scss */
+.upgrade-box .surplus {
+  font-size: 18px; }
+/* line 61, sass/main.scss */
+.upgrade-box ul {
+  list-style-type: none;
+  padding: 0; }
+/* line 66, sass/main.scss */
+.upgrade-box:first-child ul {
+  padding: 0 0 40px; }
+
+/* line 69, sass/main.scss */
+.upgrade-box.active {
+  background-color: #ff5d1a; }
+
+/* line 73, sass/main.scss */
 form.checkout .loaded {
-  display: none;
-}
+  display: none; }
