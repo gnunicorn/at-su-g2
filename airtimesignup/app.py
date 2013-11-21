@@ -38,6 +38,7 @@ def checkout():
     return render_template('checkout.html', **context)
 
 
+@app.route("/")
 @app.route("/packages")
 def show_packages():
     session["checkout_context"] = {}
@@ -62,12 +63,6 @@ def checkvat(vat):
                     "vatNumber": info.vatNumber,
                     "address": info.address
                     })
-
-
-# index
-@app.route("/")
-def index():
-    return render_template('index.html')
 
 
 # default fallback
