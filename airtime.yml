@@ -1,0 +1,35 @@
+Packages:
+  starter:
+    name: Starter
+    price: 24.95
+  plus:
+    name: Plus
+    price: 49.95
+  premium:
+    name: Premium
+    price: 74.95
+  enterprise:
+    name: Enterprise
+    price: 149.95
+
+Extras:
+  extra_streaming:
+    silver:
+      name: Silver
+      price: 17.48
+    gold:
+      name: Gold
+      price: 32.48
+    premium:
+      name: Premium
+      price: 49.95
+  expert_support:
+    silver:
+      name: Silver
+      price: 99.95
+    gold:
+      name: Gold
+      price: 249.95
+    platinum:
+      name: Platinum
+      price: 499.95

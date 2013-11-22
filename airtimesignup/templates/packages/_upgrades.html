@@ -5,21 +5,21 @@
 	<p>Included with this package is expert support level "bronze": 10 Simultaneous listeners per stream at up to 128Kbps. Here you can select an upgrade to increase the amount of listeners</p>
 	<div class="row upgrade-selection" data-upgrade-name="extra_streaming" >
 		<div data-upgrade-value="silver" class="upgrade-box col-md-offset-2 col-md-2">
-			<span class="title">Silver</span>
+			<span class="title">{{ extras['extra_streaming']['silver']['name'] }}</span>
 			<p class="desc">up to <span class="highlight">50</span> listeners</p>
-			<p><span class="surplus">+ 17,48 $/m</span></p>
+         <p><span class="surplus">+ {{ extras['extra_streaming']['silver']['price'] }} $/m</span></p>
 		</div>
 
 		<div data-upgrade-value="gold" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">Gold</span>
+			<span class="title">{{ extras['extra_streaming']['gold']['name'] }}</span>
 			<p class="desc">up to <span class="highlight">100</span> listeners</p>
-			<p><span class="surplus">+ 32,48 $/m</span></p>
+			<p><span class="surplus">+ {{ extras['extra_streaming']['gold']['price'] }} $/m</span></p>
 		</div>
 
 		<div data-upgrade-value="premium" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">Premium</span>
+			<span class="title">{{ extras['extra_streaming']['premium']['name'] }}</span>
 			<p class="desc"><span class="highlight">unlimited</span> listeners</p>
-			<p><span class="surplus">+ 49,95 $/m</span></p>
+			<p><span class="surplus">+ {{ extras['extra_streaming']['premium']['price'] }} $/m</span></p>
 		</div>
 
 	</div>
@@ -29,14 +29,14 @@
 	<p>Included with this package is expert support level "bronze": support through browser live chat, community forum and email support. Here you can select an upgrade to receive extra support</p>
 	<div class="row upgrade-selection" data-upgrade-name="expert_support" >
 		<div data-upgrade-value="silver" class="upgrade-box col-md-offset-2 col-md-2">
-			<span class="title">Silver</span>
+			<span class="title">{{ extras['expert_support']['silver']['name'] }}</span>
          <p class="desc">
             <ul><li>Telephone support <br/> (10-18 CET)</li></ul></p>
-			<p><span class="surplus">+ 99,95 $/m</span></p>
+			<p><span class="surplus">+ {{ extras['expert_support']['silver']['price'] }} $/m</span></p>
 		</div>
 
 		<div data-upgrade-value="gold" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">Gold</span>
+			<span class="title">{{ extras['expert_support']['gold']['name'] }}</span>
 			<p class="desc">
             <ul>
                <li>Telephone support <br/> (10-18 CET)</li>
@@ -44,11 +44,11 @@
                <li>2h of Expert Talktime</li>
             </ul>
          </p>
-			<p><span class="surplus">+ 249,95 $/m</span></p>
+			<p><span class="surplus">+ {{ extras['expert_support']['gold']['price'] }} $/m</span></p>
 		</div>
 
 		<div data-upgrade-value="platinum" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">Platinum</span>
+			<span class="title">{{ extras['expert_support']['platinum']['name'] }}</span>
 			<p class="desc">
             <ul>
                <li>Telephone support <br/> (10-18 CET)</li>
@@ -56,6 +56,6 @@
                <li>8h of Expert Talktime</li>
             </ul>
          </p>
-			<p><span class="surplus">+ 499,95 $/m</span></p>
+			<p><span class="surplus">+ {{ extras['expert_support']['platinum']['price'] }} $/m</span></p>
 		</div>
 	</div>
