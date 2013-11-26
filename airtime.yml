@@ -1,35 +1,35 @@
 Packages:
   starter:
-    name: Starter
+    title: "Starter"
     price: 24.95
   plus:
-    name: Plus
+    title: "Plus"
     price: 49.95
   premium:
-    name: Premium
+    title: "Premium"
     price: 74.95
   enterprise:
-    name: Enterprise
+    title: "Enterprise"
     price: 149.95
 
 Extras:
-  extra_streaming:
-    silver:
-      name: Silver
-      price: 17.48
-    gold:
-      name: Gold
-      price: 32.48
-    premium:
-      name: Premium
-      price: 49.95
   expert_support:
-    silver:
-      name: Silver
-      price: 99.95
-    gold:
-      name: Gold
-      price: 249.95
-    platinum:
-      name: Platinum
-      price: 499.95
+    title: "Expert Support"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: extra_hours
+        title: "Extra hours"
+        description: ""
+        price: 1
+      - name: training
+        title: "Training"
+        description: ""
+        price: 2
+      - name: workshop
+        title: "Workshop"
+        description: ""
+        price: 3
+      - name: developer_time
+        title: "Developer Time"
+        description: ""
+        price: 4

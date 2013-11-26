@@ -1,0 +1,7 @@
+<h3>{{ package.title }} - {{ package.price }} $/m <a href="/packages">change</a></h3>
+
+{% for upgrade in [expert_support] %}
+   {% if upgrade %}
+      <h3>+ {{ upgrade.title }} - {{ upgrade.price }} $/m</h3>
+   {% endif %}
+{% endfor %}

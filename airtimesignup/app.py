@@ -19,7 +19,7 @@ app = Flask(__name__, static_folder='../static')
 
 ## HELPER FUNCTIONS
 def _extract_extras(context):
-    return dict([(key, config.airtime["Extras"][key][context[key]])
+    return dict([(key, config.airtime["Extras"][key]['options'][int(context[key])])
                  for key in config.airtime["Extras"].keys()
                  if key in context])
 

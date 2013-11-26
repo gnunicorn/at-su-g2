@@ -16,16 +16,7 @@
 
     <h2>Your bill</h2>
 
-    	
-    	<h3>{{package.name}} - {{package.price}} $/m <a href="/packages">change</a></h3>
-
-    	{% if extra_streaming %}
-    		<h3>+ {{extra_streaming.name}} - {{extra_streaming.price}} $/m</h3>
-    	{% endif %}
-
-    	{% if expert_support %}
-    		<h3>+ {{expert_support.name}} - {{expert_support.price}} $/m</h3>
-    	{% endif %}
+    {% include "packages/_package_selection.html" %}
 
     <hr>
     <p>

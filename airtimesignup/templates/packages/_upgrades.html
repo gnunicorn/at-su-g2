@@ -1,61 +1,17 @@
-
-	<h2>Upgrades</h2>
+<h2>Upgrades</h2>
 	
-	<h3>Extra Streaming Capabilities</h3>
-	<p>Included with this package is expert support level "bronze": 10 Simultaneous listeners per stream at up to 128Kbps. Here you can select an upgrade to increase the amount of listeners</p>
-	<div class="row upgrade-selection" data-upgrade-name="extra_streaming" >
-		<div data-upgrade-value="silver" class="upgrade-box col-md-offset-2 col-md-2">
-			<span class="title">{{ extras['extra_streaming']['silver']['name'] }}</span>
-			<p class="desc">up to <span class="highlight">50</span> listeners</p>
-         <p><span class="surplus">+ {{ extras['extra_streaming']['silver']['price'] }} $/m</span></p>
-		</div>
-
-		<div data-upgrade-value="gold" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">{{ extras['extra_streaming']['gold']['name'] }}</span>
-			<p class="desc">up to <span class="highlight">100</span> listeners</p>
-			<p><span class="surplus">+ {{ extras['extra_streaming']['gold']['price'] }} $/m</span></p>
-		</div>
-
-		<div data-upgrade-value="premium" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">{{ extras['extra_streaming']['premium']['name'] }}</span>
-			<p class="desc"><span class="highlight">unlimited</span> listeners</p>
-			<p><span class="surplus">+ {{ extras['extra_streaming']['premium']['price'] }} $/m</span></p>
-		</div>
-
-	</div>
-
-
-	<h3>Expert Support</h3>
-	<p>Included with this package is expert support level "bronze": support through browser live chat, community forum and email support. Here you can select an upgrade to receive extra support</p>
-	<div class="row upgrade-selection" data-upgrade-name="expert_support" >
-		<div data-upgrade-value="silver" class="upgrade-box col-md-offset-2 col-md-2">
-			<span class="title">{{ extras['expert_support']['silver']['name'] }}</span>
-         <p class="desc">
-            <ul><li>Telephone support <br/> (10-18 CET)</li></ul></p>
-			<p><span class="surplus">+ {{ extras['expert_support']['silver']['price'] }} $/m</span></p>
-		</div>
-
-		<div data-upgrade-value="gold" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">{{ extras['expert_support']['gold']['name'] }}</span>
-			<p class="desc">
-            <ul>
-               <li>Telephone support <br/> (10-18 CET)</li>
-               <li>Website design support</li>
-               <li>2h of Expert Talktime</li>
-            </ul>
-         </p>
-			<p><span class="surplus">+ {{ extras['expert_support']['gold']['price'] }} $/m</span></p>
-		</div>
-
-		<div data-upgrade-value="platinum" class="upgrade-box col-md-offset-1 col-md-2">
-			<span class="title">{{ extras['expert_support']['platinum']['name'] }}</span>
-			<p class="desc">
-            <ul>
-               <li>Telephone support <br/> (10-18 CET)</li>
-               <li>Website design support</li>
-               <li>8h of Expert Talktime</li>
-            </ul>
-         </p>
-			<p><span class="surplus">+ {{ extras['expert_support']['platinum']['price'] }} $/m</span></p>
-		</div>
-	</div>
+{% for upgrade in ['expert_support'] %}
+   <h3>{{ extras[upgrade].title|safe }}</h3>
+   <p>{{ extras[upgrade].description|safe }}</p>
+   <ul>
+      {% for option in extras[upgrade].options %}
+         <li>
+            <label class="radio">
+               <input type="radio" name="{{ upgrade }}" id="{{ upgrade }}-{{ option.name }}"
+                  value="{{ loop.index0 }}">
+                  {{ option.title|safe }}: {{ option.description|safe }} [+ {{ option.price }} $/m]
+            </label>
+         </li>
+      {% endfor %}
+   </ul>
+{% endfor %}
