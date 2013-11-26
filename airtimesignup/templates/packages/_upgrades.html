@@ -1,6 +1,9 @@
 <h2>Upgrades</h2>
 	
-{% for upgrade in ['expert_support'] %}
+{% for upgrade in ['extra_storage', 'extra_listeners', 'boost',
+                     'stream', 'quality', 'sla', 'sandbox',
+                     'external_streaming', 'broadcaster_theme',
+                     'expert_support', 'only_hosting'] %}
    <h3>{{ extras[upgrade].title|safe }}</h3>
    <p>{{ extras[upgrade].description|safe }}</p>
    <ul>

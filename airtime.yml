@@ -13,23 +13,139 @@ Packages:
     price: 149.95
 
 Extras:
+  extra_storage:
+    title: "Extra Storage"
+    description: "Storage (GB)"
+    options:
+      - name: silver
+        title: "Silver"
+        description: "5 GB"
+        price: 4.99
+      - name: gold
+        title: "Gold"
+        description: "50 GB"
+        price: 39.99
+      - name: platinum
+        title: "Platinum"
+        description: "100 GB"
+        price: 69.99
+  extra_listeners:
+    title: "Simultaneous listeners"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: silver
+        title: "Silver"
+        description: "25 listeners"
+        price: 9
+      - name: gold
+        title: "Gold"
+        description: "50 listeners"
+        price: 14.99
+      - name: platinum
+        title: "Platinum"
+        description: "100 listeners"
+        price: 24.99
+  boost:
+    title: "Boost"
+    description: "1 peek per week"
+    options:
+      - name: silver
+        title: "Silver"
+        description: "250"
+        price: 14.99
+      - name: gold
+        title: "Gold"
+        description: "500"
+        price: 24.99
+      - name: platinum
+        title: "Platinum"
+        description: "1000"
+        price: 39.99
+  stream:
+    title: "Stream"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: silver
+        title: "Silver"
+        description: "1"
+        price: 9
+      - name: gold
+        title: "Gold"
+        description: "2"
+        price: 14.99
+  quality:
+    title: "Quality"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: silver
+        title: "Silver"
+        description: "165"
+        price: 9
+      - name: gold
+        title: "Gold"
+        description: "192"
+        price: 14.99
+      - name: platinum
+        title: "Platinum"
+        description: "320"
+        price: 24.99
+  sla:
+    title: "SLA"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: sla
+        title: "SLA"
+        description: ""
+        price: 99
+  sandbox:
+    title: "Sandbox"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: sandbox
+        title: "Sandbox"
+        description: ""
+        price: 29
+  external_streaming:
+    title: "External Streaming Enabled"
+    description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
+    options:
+      - name: external_streaming
+        title: "External Streaming Enabled"
+        description: ""
+        price: 99
+  broadcaster_theme:
+    title: "Broadcaster Theme"
+    description: "Take it as it is, including hosting to 75000 visitors monthly max"
+    options:
+      - name: broadcaster_theme
+        title: "Broadcaster Theme"
+        description: ""
+        price: 49
   expert_support:
     title: "Expert Support"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
       - name: extra_hours
-        title: "Extra hours"
+        title: "Extra Hours"
         description: ""
-        price: 1
+        price:
       - name: training
         title: "Training"
         description: ""
-        price: 2
+        price:
       - name: workshop
         title: "Workshop"
         description: ""
-        price: 3
+        price:
       - name: developer_time
         title: "Developer Time"
         description: ""
-        price: 4
+        price:
+  only_hosting:
+    title: "Hosting"
+    description: "Only hosting instance with basic support (live chat during business hours, access to ticket system)"
+    options:
+      - name: only_hosting
+        title: "Only hosting"
+        description: ""
+        price: 59
