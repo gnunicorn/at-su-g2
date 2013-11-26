@@ -26,6 +26,10 @@ Please run the following after each pull from within your virtualenv
   (v)$ pip install -r requirements.txt
   (v)$ alembic upgrade head
 
+## Cheat Sheet:
+
+ - to make alembic generate a new revision from the model(s) you created run `alembic revision --auto`
+ 
 
 ## Understanding the infrastructure
 
