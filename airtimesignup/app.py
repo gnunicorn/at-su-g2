@@ -40,7 +40,6 @@ def checkout():
     return render_template('checkout.html', **context)
 
 
-@app.route("/")
 @app.route("/packages")
 def show_packages():
     session["checkout_context"] = {}
@@ -90,6 +89,7 @@ with open('airtime.yml', 'r') as f:
 
 # This should go into a config file
 app.secret_key = config.SESSION_SECRET
+app.add_url_rule("/", endpoint='/', redirect_to="/packages")
 
 # Add Login Management
 login_manager = LoginManager()
