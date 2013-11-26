@@ -42,34 +42,8 @@ table.packages {
    }
 }
 
-.upgrade-box {
-	text-align: center;
-   border: 1px solid #000;
-   padding: 15px 0;
-
-   .title { font-size: $font-size-highlight; }
-
-   .highlight {
-      font-size: $font-size-highlight;
-      display: block;
-   }
-
-   &:last-child .highlight { padding: 20px 0 0; }
-
-   .surplus { font-size: $font-size-price; }
-
-   ul {
-      list-style-type: none;
-      padding: 0;
-   }
-
-   &:first-child ul { padding: 0 0 40px; }
-}
-
-.upgrade-box.active {
-	background-color: $hero;
-}
-
 form.checkout .loaded {
    display: none;
 }
+
+.upgrades ul { list-style: none; }
