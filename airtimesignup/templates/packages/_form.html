@@ -1,0 +1,7 @@
+{% include "packages/_upgrades.html" %}
+<form method="POST" action="/prepare_checkout">
+   <input type="hidden" name="package" value="{{ package.name }}" />
+   <input type="hidden" name="extra_streaming" id="extra_streaming" value="" />
+   <input type="hidden" name="expert_support" id="expert_support" value="" />
+	<button class="pull-right btn btn-primary btn-lg">continue >> </button>
+</form>

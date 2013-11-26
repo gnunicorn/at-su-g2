@@ -114,10 +114,12 @@ def show_packages():
                            packages=config.airtime['Packages'])
 
 
-@app.route("/packages/<string:package>")
-def show_package(package):
-    return render_template('packages/{0}.html'.format(package),
-                           package=config.airtime['Packages'][package],
+@app.route("/packages/<string:package_name>")
+def show_package(package_name):
+    package = config.airtime['Packages'][package_name]
+    package['name'] = package_name
+    return render_template('packages/{0}.html'.format(package_name),
+                           package=package,
                            extras=config.airtime['Extras'])
 
 
