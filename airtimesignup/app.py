@@ -81,9 +81,10 @@ def confirm():
         return redirect(url_for(".checkout"))
 
     ctx = session["checkout_context"]
+    currency = ctx["currency"]
 
     keys = filter(lambda x: "price" in ctx[x], ctx.keys())
-    sum_total = sum([ctx[x]["price"] for x in keys])
+    sum_total = sum([ctx[x]["price"][currency["label"]] for x in keys])
     if order.vat_addr:
         order.total = sum_total
     else:
