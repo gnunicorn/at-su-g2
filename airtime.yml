@@ -128,19 +128,19 @@ Extras:
       - name: extra_hours
         title: "Extra Hours"
         description: ""
-        price:
+        price: 1
       - name: training
         title: "Training"
         description: ""
-        price:
+        price: 1
       - name: workshop
         title: "Workshop"
         description: ""
-        price:
+        price: 1
       - name: developer_time
         title: "Developer Time"
         description: ""
-        price:
+        price: 1
   only_hosting:
     title: "Hosting"
     description: "Only hosting instance with basic support (live chat during business hours, access to ticket system)"
