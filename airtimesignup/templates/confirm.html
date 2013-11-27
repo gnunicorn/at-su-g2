@@ -20,11 +20,11 @@
 
     <hr>
     <p>
-    	SUM: {{sum_total}} $/m<br>
+      SUM: {{sum_total}} {{ currency.symbol }}/m<br>
     	{% if order.vat %}
-	       VAT: {{order.vat}} $/m<br>
+	       VAT: {{order.vat}} {{ currency.symbol }}/m<br>
         {% endif %}
-	    TOTAL: {{order.total}} $/m<br>
+	    TOTAL: {{order.total}} {{ currency.symbol }}/m<br>
     	
     </p>
 

@@ -12,7 +12,7 @@
             <label class="radio">
                <input type="radio" name="{{ upgrade }}" id="{{ upgrade }}-{{ option.name }}"
                   value="{{ loop.index0 }}">
-                  {{ option.title|safe }}: {{ option.description|safe }} [+ {{ option.price }} $/m]
+                  {{ option.title|safe }}: {{ option.description|safe }} [+ {{ option.price[currency.label] }} {{ currency.symbol }}/m]
             </label>
          </li>
       {% endfor %}

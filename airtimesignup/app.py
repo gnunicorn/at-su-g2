@@ -23,6 +23,13 @@ def _extract_extras(context):
                  for key in config.airtime["Extras"].keys()
                  if key in context])
 
+def _currency_data(currency):
+    if currency:
+        return filter(lambda x: x['label'] == currency,
+                      config.airtime['Currencies'])[0]
+    else:
+        return config.airtime['Currencies'][0]
+
 
 def require_checkout_context(func):
     def wrapped(*args, **kwargs):
@@ -33,11 +40,11 @@ def require_checkout_context(func):
     wrapped.func_name = func.func_name
     return wrapped
 
-
 @app.route("/prepare_checkout", methods=["POST"])
 def prepare_checkout():
     session["checkout_context"] = ctx = _extract_extras(request.form)
     ctx["package"] = config.airtime['Packages'][request.form.get("package", "starter")]
+    ctx["currency"] = _currency_data(request.form.get('currency', None))
     return redirect(url_for("checkout"))
 
 
@@ -45,7 +52,8 @@ def prepare_checkout():
 @require_checkout_context
 def checkout():
     context = dict(session["checkout_context"])
-    total = sum([context[x]["price"] for x in context.keys()])
+    keys = filter(lambda x: "price" in context[x], context.keys())
+    total = sum([context[x]["price"][context["currency"]["label"]] for x in keys])
     context["sum_total"] = total
     context["vat"] = math.ceil(total * 19) / 100.0
     context["total"] = math.ceil(total * 119) / 100.0
@@ -73,7 +81,9 @@ def confirm():
         return redirect(url_for(".checkout"))
 
     ctx = session["checkout_context"]
-    sum_total = sum([ctx[x]["price"] for x in ctx.keys()])
+
+    keys = filter(lambda x: "price" in ctx[x], ctx.keys())
+    sum_total = sum([ctx[x]["price"] for x in keys])
     if order.vat_addr:
         order.total = sum_total
     else:
@@ -106,12 +116,19 @@ def fake_payment():
 def payment_callback():
     pass
 
+@app.route("/update_currency", methods=['POST'])
+def update_currency():
+    return redirect(url_for("show_packages",
+                            currency=request.form.get('currency')))
 
 @app.route("/packages")
 def show_packages():
     session["checkout_context"] = {}
     return render_template('packages.html',
-                           packages=config.airtime['Packages'])
+                           packages=config.airtime['Packages'],
+                           currencies=config.airtime['Currencies'],
+                           selected_currency=_currency_data(request.args.get('currency',
+                                                                            None)))
 
 
 @app.route("/packages/<string:package_name>")
@@ -120,7 +137,9 @@ def show_package(package_name):
     package['name'] = package_name
     return render_template('packages/{0}.html'.format(package_name),
                            package=package,
-                           extras=config.airtime['Extras'])
+                           extras=config.airtime['Extras'],
+                           currency=_currency_data(request.args.get('currency',
+                                                                    None)))
 
 
 @app.route("/checkvat/<string:vat>")

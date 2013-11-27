@@ -11,14 +11,14 @@
 
     <hr>
     <p>
-    	SUM: {{sum_total}} $/m<br>
+       SUM: {{sum_total}} {{ currency.symbol }}/m<br>
     	<div id="with-vat">
-	    	VAT: {{vat}} $/m<br>
-	    	TOTAL: {{total}} $/m<br>
+         VAT: {{vat}} {{ currency.symbol }}/m<br>
+         TOTAL: {{total}} {{ currency.symbol }}/m<br>
     	</div>
     	<div id="without-vat" style="display:none">
-	    	VAT: 0,00 $/m<br>
-	    	TOTAL: {{sum_total}} $/m<br>
+         VAT: 0,00 {{ currency.symbol }}/m<br>
+         TOTAL: {{sum_total}} {{ currency.symbol }}/m<br>
     	</div>
 
     </p>

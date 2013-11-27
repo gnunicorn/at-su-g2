@@ -1,16 +1,40 @@
+# The first currency is the default
+Currencies:
+  - label: usd
+    name: "USD"
+    symbol: '$'
+  - label: eur
+    name: "Euro"
+    symbol: '€'
+  - label: gbp
+    name: "GBP"
+    symbol: '£'
+
 Packages:
   starter:
     title: "Starter"
-    price: 24.95
+    price:
+      usd: 24.95
+      eur: 1
+      gbp: 2
   plus:
     title: "Plus"
-    price: 49.95
+    price:
+      usd: 49.95
+      eur: 1
+      gbp: 2
   premium:
     title: "Premium"
-    price: 74.95
+    price:
+      usd: 74.95
+      eur: 1
+      gbp: 2
   enterprise:
     title: "Enterprise"
-    price: 149.95
+    price:
+      usd: 149.95
+      eur: 1
+      gbp: 2
 
 Extras:
   extra_storage:
@@ -20,15 +44,24 @@ Extras:
       - name: silver
         title: "Silver"
         description: "5 GB"
-        price: 4.99
+        price:
+          usd: 4.99
+          eur: 1
+          gbp: 2
       - name: gold
         title: "Gold"
         description: "50 GB"
-        price: 39.99
+        price:
+          usd: 39.99
+          eur: 1
+          gbp: 2
       - name: platinum
         title: "Platinum"
         description: "100 GB"
-        price: 69.99
+        price:
+          usd: 69.99
+          eur: 1
+          gbp: 2
   extra_listeners:
     title: "Simultaneous listeners"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -36,15 +69,24 @@ Extras:
       - name: silver
         title: "Silver"
         description: "25 listeners"
-        price: 9
+        price:
+          usd: 9
+          eur: 1
+          gbp: 2
       - name: gold
         title: "Gold"
         description: "50 listeners"
-        price: 14.99
+        price:
+          usd: 14.99
+          eur: 1
+          gbp: 2
       - name: platinum
         title: "Platinum"
         description: "100 listeners"
-        price: 24.99
+        price:
+          usd: 24.99
+          eur: 1
+          gbp: 2
   boost:
     title: "Boost"
     description: "1 peek per week"
@@ -52,15 +94,24 @@ Extras:
       - name: silver
         title: "Silver"
         description: "250"
-        price: 14.99
+        price:
+          usd: 14.99
+          eur: 1
+          gbp: 2
       - name: gold
         title: "Gold"
         description: "500"
-        price: 24.99
+        price:
+          usd: 24.99
+          eur: 1
+          gbp: 2
       - name: platinum
         title: "Platinum"
         description: "1000"
-        price: 39.99
+        price:
+          usd: 39.99
+          eur: 1
+          gbp: 2
   stream:
     title: "Stream"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -68,11 +119,17 @@ Extras:
       - name: silver
         title: "Silver"
         description: "1"
-        price: 9
+        price:
+          usd: 9
+          eur: 1
+          gbp: 2
       - name: gold
         title: "Gold"
         description: "2"
-        price: 14.99
+        price:
+          usd: 14.99
+          eur: 1
+          gbp: 2
   quality:
     title: "Quality"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -80,15 +137,24 @@ Extras:
       - name: silver
         title: "Silver"
         description: "165"
-        price: 9
+        price:
+          usd: 9
+          eur: 1
+          gbp: 2
       - name: gold
         title: "Gold"
         description: "192"
-        price: 14.99
+        price:
+          usd: 14.99
+          eur: 1
+          gbp: 2
       - name: platinum
         title: "Platinum"
         description: "320"
-        price: 24.99
+        price:
+          usd: 24.99
+          eur: 1
+          gbp: 2
   sla:
     title: "SLA"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -96,7 +162,10 @@ Extras:
       - name: sla
         title: "SLA"
         description: ""
-        price: 99
+        price:
+          usd: 99
+          eur: 1
+          gbp: 2
   sandbox:
     title: "Sandbox"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -104,7 +173,10 @@ Extras:
       - name: sandbox
         title: "Sandbox"
         description: ""
-        price: 29
+        price:
+          usd: 29
+          eur: 1
+          gbp: 2
   external_streaming:
     title: "External Streaming Enabled"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -112,7 +184,10 @@ Extras:
       - name: external_streaming
         title: "External Streaming Enabled"
         description: ""
-        price: 99
+        price:
+          usd: 99
+          eur: 1
+          gbp: 2
   broadcaster_theme:
     title: "Broadcaster Theme"
     description: "Take it as it is, including hosting to 75000 visitors monthly max"
@@ -120,7 +195,10 @@ Extras:
       - name: broadcaster_theme
         title: "Broadcaster Theme"
         description: ""
-        price: 49
+        price:
+          usd: 49
+          eur: 1
+          gbp: 2
   expert_support:
     title: "Expert Support"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
@@ -128,19 +206,31 @@ Extras:
       - name: extra_hours
         title: "Extra Hours"
         description: ""
-        price: 1
+        price:
+          usd: 1
+          eur: 1
+          gbp: 2
       - name: training
         title: "Training"
         description: ""
-        price: 1
+        price:
+          usd: 1
+          eur: 1
+          gbp: 2
       - name: workshop
         title: "Workshop"
         description: ""
-        price: 1
+        price:
+          usd: 1
+          eur: 1
+          gbp: 2
       - name: developer_time
         title: "Developer Time"
         description: ""
-        price: 1
+        price:
+          usd: 1
+          eur: 1
+          gbp: 2
   only_hosting:
     title: "Hosting"
     description: "Only hosting instance with basic support (live chat during business hours, access to ticket system)"
@@ -148,4 +238,7 @@ Extras:
       - name: only_hosting
         title: "Only hosting"
         description: ""
-        price: 59
+        price:
+          usd: 59
+          eur: 1
+          gbp: 2
