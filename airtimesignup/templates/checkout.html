@@ -2,7 +2,7 @@
 {% block title %}Checkout{% endblock %}
 
 {% block body %}
-	<form action="/confirm" method="POST" class="checkout">
+	<form action="/confirm" method="POST" id="checkout-form" class="checkout">
     <h1>Checkout</h1>
 
     <h2>Your Configuration</h2>
@@ -29,18 +29,27 @@
         {% endif %}
 
         {% if current_user.is_authenticated() %}
-        <div
+        <div class="row">
         	<div class="col-md-4">
 	        	<dl class="dl-horizontal">
 		        	<dt>User Account</dt>
 		        	<dd>{{current_user.email}} <a id="browserid-logout">change</a></dd>
 
+                    <div class="form-group">
+                        <dt><label for="domain" class="control-label">desired Domain</label></dt>
+                        <dd><input id="domain" type="text" name="domain" class="form-control"></dd>
+                    </div>
+
 		        	<dt>Bill to</dt>
-		        	<dd><input type="radio" name="bill-selector" value="vat" checked="checked"> VAT Nr.<br>
-		        		<input id="vatfield" type="text" name="vat-nr" disabled="disabled" class="disabled"> <br>
-		        	<input type="radio" name="bill-selector" value="address" > Address<br>
-		        	<textarea id="addressfield" name="address" disabled="disabled" class="disabled"></textarea>
-		        		
+		            <dd>
+                        <div class="form-group">
+                            <input type="radio" name="bill-selector" value="vat" checked="checked"> VAT Nr.<br>
+		        		    <input id="vatfield" type="text" name="vat-nr" disabled="disabled" class="form-control disabled">
+                        </div>
+                        <div class="form-group">
+		        	         <input type="radio" name="bill-selector" value="address" > Address<br>
+		        	         <textarea id="addressfield" name="address" disabled="disabled" class="form-control disabled"></textarea>
+                        </div>
 		        	</dd>
 	        	</dl>
         	</div>
@@ -56,6 +65,10 @@
         		</div>
 
         	</div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-primary" id="submit-button">Submit</button>
         </div>
 
         {% endif %}
@@ -84,19 +97,56 @@
         		}	
         	}).change();
 
+            function validate_form(form){
+                var $this = $(form),
+                    params = {},
+                    valid = true;
+
+                $.each($this.serializeArray(), function(idx, item){
+                    params[item.name] = item.value;
+                });
+
+                $this.find(".has-error").removeClass("has-error");
+
+                if (!$.trim(params["domain"])) {
+                    $("#domain").parent().parent().addClass("has-error");
+                    valid = false;
+                }
+
+                console.log(params);
+
+                if ((params["bill-selector"] === "vat")){
+                    if (
+                        $("#vatfield").data("vat_checker") !== "valid")) {
+                    
+                        $("#vatfield").parent().addClass("has-error");
+                        valid = false;
+                    } 
+                } else if (!$.trim(params["address"])){
+                    $("#addressfield").parent().addClass("has-error");
+                    valid = false;
+                } else {
+                    valid = false;
+                }
+                return valid;
+            }
+
+            $("#checkout-form").bind("submit", function(){
+                return validate_form(this);
+            });
+
 	        $('#vatfield').bind('keyup', function(){
 			    var $this = $(this),
 			    	value = $.trim($(this).val()),
 			    	$target = $("#vat-test"),
 			    	delay = 1500; // 1.5 seconds delay after last input
 
-			   	console.log($this.data("last-tested"));
-
 			    //only continue if it actually changed
 			    if (value === $this.data("last-tested")) {
 			    	return;
 			    }
 			    $this.data("last-tested", value)
+                $this.data("vat_checker", false);
 
 			    // only continue if there is some data in it
 			    $target.find(".loaded").hide();
@@ -117,6 +167,8 @@
 			        		if (! res.valid){
 			        			$target.find(".invalid").show();
 			        		} else {
+                                $this.data("vat_checker", "valid");
+                                $this.parent().removeClass("has-error").addClass("has-success")
 			        			var success = $('<div class="alert alert-success"><strong>VAT found</strong><br></div>')
 
 			        			var address = $("<address>").html(res.name + "<br>" + res.address.replace("\n", "<br>"))
