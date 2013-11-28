@@ -10,6 +10,11 @@ Currencies:
     name: "GBP"
     symbol: '£'
 
+# externals APIs
+# leave empty to have it not trigger
+APIs:
+  domain_check: 
+
 Packages:
   starter:
     title: "Starter"

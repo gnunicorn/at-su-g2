@@ -35,6 +35,7 @@ class Order(Base):
     created = Column(DateTime, server_default=func.utc_timestamp())
     updated = Column(DateTime, server_default=func.utc_timestamp(),
                      onupdate=func.utc_timestamp())
+    domain = Column(Unicode)
     state = Column(Unicode)
     address = Column(Text)
     vat_addr = Column(Unicode, nullable=True)

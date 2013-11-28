@@ -1,6 +1,6 @@
 #* encoding=utf-8
 from flask import (Flask, render_template, jsonify, request,
-                   session, redirect, url_for)
+                   session, redirect, url_for, json)
 from flask.ext.login import LoginManager, current_user, login_required
 from flask.ext.browserid import BrowserID
 
@@ -11,8 +11,9 @@ from airtimesignup.checkvat import get_vat_info
 from airtimesignup.models import Order
 from airtimesignup import config
 
+from urllib2 import urlopen
+
 import math
-import json
 
 app = Flask(__name__, static_folder='../static')
 
@@ -23,12 +24,27 @@ def _extract_extras(context):
                  for key in config.airtime["Extras"].keys()
                  if key in context])
 
+
 def _currency_data(currency):
     if currency:
         return filter(lambda x: x['label'] == currency,
                       config.airtime['Currencies'])[0]
     else:
         return config.airtime['Currencies'][0]
+
+
+def check_domain_available(domain):
+    if not config.airtime["APIs"]["domain_check"]:
+        return True
+
+    naked_url = config.airtime["APIs"]["domain_check"]
+    url = naked_url.format(domain)
+    try:
+        if json.loads(urlopen(url).read())["available"]:
+            return True
+    except Exception as exc:
+        print("Error checking domain: {}".format(exc))
+        return False
 
 
 def require_checkout_context(func):
@@ -39,6 +55,7 @@ def require_checkout_context(func):
         return func(*args, **kwargs)
     wrapped.func_name = func.func_name
     return wrapped
+
 
 @app.route("/prepare_checkout", methods=["POST"])
 def prepare_checkout():
@@ -76,6 +93,12 @@ def confirm():
 
     elif request.form.get("address"):
         order.address = request.form.get("address")
+    else:
+        # FIXME: give good user message
+        return redirect(url_for(".checkout"))
+
+    if check_domain_available(request.form.get("domain")):
+        order.domain = request.form.get("domain")
     else:
         # FIXME: give good user message
         return redirect(url_for(".checkout"))
@@ -154,6 +177,11 @@ def checkvat(vat):
                     "vatNumber": info.vatNumber,
                     "address": info.address
                     })
+
+
+@app.route("/checkdomain/<string:domain>")
+def checkdomain(domain):
+    return jsonify({"available": check_domain_available(domain)})
 
 
 # default fallback
