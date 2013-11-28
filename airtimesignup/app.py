@@ -11,7 +11,7 @@ from airtimesignup.checkvat import get_vat_info
 from airtimesignup.models import Order
 from airtimesignup import config
 
-from urllib2 import urlopen
+import urllib2
 
 import math
 
@@ -40,7 +40,7 @@ def check_domain_available(domain):
     naked_url = config.airtime["APIs"]["domain_check"]
     url = naked_url.format(domain)
     try:
-        if json.loads(urlopen(url).read())["available"]:
+        if json.loads(urllib2.urlopen(url).read())["available"]:
             return True
     except Exception as exc:
         print("Error checking domain: {}".format(exc))
@@ -121,13 +121,19 @@ def confirm():
     return render_template("confirm.html", sum_total=sum_total, order=order, **ctx)
 
 
-@app.route("/payment")
+@app.route("/payment", methods=['POST'])
 @require_checkout_context
 def start_payment():
-    # we have to make sure all is fine, here, too:
+    order = Order.query.get(request.form["order_id"])
+    if not order or order.state not in ("to_confirm", "in_payment"):
+        raise ValueError()
+
+    order.state = "in_payment"
+    db_session.add(order)
+    db_session.commit()
 
     callback_url = url_for(".payment_callback",
-                           payment_id=1, _external=True)
+                           payment_id=order.id, _external=True)
     return redirect(config.PAYMENT_URL.format(callback_url))
 
 
@@ -137,8 +143,30 @@ def fake_payment():
 
 
 @app.route("/payment/<string:payment_id>/callback/")
-def payment_callback():
-    pass
+def payment_callback(payment_id):
+    # FIXME: needs to check against the third-party
+    order = Order.query.get(payment_id)
+    if not order or order.state != "in_payment":
+        raise ValueError()
+
+    order.state = "paid"
+    db_session.add(order)
+    db_session.commit()
+
+    paid_callback = config.airtime["APIs"]["paid_callback"]
+    details = json.loads(order.details)
+    if paid_callback:
+        for key in ("created", "updated", "domain", "state", "address",
+                    "vat_addr", "currency", "total", "total_vat"):
+            details[key] = getattr(details, key)
+
+        req = urllib2.Request(paid_callback, json.dumps(details),
+                              {'Content-Type': 'application/json'})
+        urllib2.urlopen(req).read()
+
+    return render_template("end_confirm.html", order=order, **details)    
+
+
 
 @app.route("/update_currency", methods=['POST'])
 def update_currency():

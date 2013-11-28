@@ -1,8 +1,9 @@
 {% extends "layout.html" %}
-{% block title %}Checkout{% endblock %}
+{% block title %}Accdpted{% endblock %}
 
 {% block body %}
-    <h1>Please confirm</h1>
+    <h1>Thank you for your order</h1>
+    <h3>Your order has been confirmed</h3>
 
     <h2>Address</h2>
 
@@ -30,11 +31,4 @@
     <h2>For domain</h2>
     <p>{{order.domain}}</p>
 
-    <h2>Confirm</h2>
-    <p>
-        <form method="POST" action="/payment">
-            <input type="hidden" name="order_id" value="{{order.id}}" />
-            <button type="submit" class="btn btn-primary" href="">Confirm order and pay</button> using XXXXX
-        </form>
-    </p>
 {% endblock %}

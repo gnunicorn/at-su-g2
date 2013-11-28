@@ -14,6 +14,7 @@ Currencies:
 # leave empty to have it not trigger
 APIs:
   domain_check: 
+  paid_callback: 
 
 Packages:
   starter:
