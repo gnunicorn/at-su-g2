@@ -181,7 +181,7 @@ def checkvat(vat):
 
 @app.route("/checkdomain/<string:domain>")
 def checkdomain(domain):
-    return jsonify({"available": check_domain_available(domain)})
+    return jsonify({"valid": check_domain_available(domain)})
 
 
 # default fallback

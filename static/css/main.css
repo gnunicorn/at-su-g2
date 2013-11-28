@@ -50,3 +50,22 @@ form.checkout .loaded {
 /* line 49, sass/main.scss */
 .upgrades ul {
   list-style: none; }
+
+  
+
+
+#vat-test > *,
+#domain-test > *
+ {
+  display:none;
+}
+
+#vat-test.loading .loading,
+#vat-test.check-valid .check-valid,
+#vat-test.check-invalid .check-invalid,
+#domain-test.loading .loading,
+#domain-test.check-valid .check-valid,
+#domain-test.check-invalid .check-invalid {
+  display: block;
+}
+

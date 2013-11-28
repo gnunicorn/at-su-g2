@@ -25,8 +25,10 @@
 	       VAT: {{order.vat}} {{ currency.symbol }}/m<br>
         {% endif %}
 	    TOTAL: {{order.total}} {{ currency.symbol }}/m<br>
-    	
     </p>
+
+    <h2>For domain</h2>
+    <p>{{order.domain}}</p>
 
     <h2>Billing details</h2>
         {% if not current_user.is_authenticated() %}        
