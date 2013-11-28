@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
-{% block title %}Premium Package{% endblock %}
+{% block title %}{{ package.title }} Package{% endblock %}
 
 {% block body %}
 
 	<h1>Your selection</h1>
 	<div class="row">
 		<div class="col-md-offset-1 col-md-8">
-			<h2>Airtime Pro Premium<a href="/"><small>change</small></a></h2>
-			<p>150 GB Storage and 2 simultaneous streams with different bitrates included</p>
+         <h2>Airtime Pro {{ package.title }}<a href="/"><small>change</small></a></h2>
+         <p>{{ package.description }}</p>
 		</div>
 		<div class="col-md-2">
          <h3>{{ package.price[currency.label] }} {{ currency.symbol }}/m</h3>

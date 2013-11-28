@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-
-{% set query_string = ("?currency=" + selected_currency.label) %}
+{% set package_names = ['starter', 'plus', 'premium', 'enterprise'] %}
 
 {% block title %}New app{% endblock %}
 
@@ -8,7 +7,7 @@
    <h1>Please choose your Airtime Package</h1>
    <h3>Cloud-hosted software, storage and streaming - everything you need to start a radio station.</h3>
    <div class="row">
-      <form class="form-inline pull-right" role="form" method="POST" action="/update_currency">
+      <form class="form-inline pull-right update-currency" role="form" method="POST" action="/update_currency">
          <div class="form-group">
             <label class="sr-only" for="currency">Use another currency</label>
             <select id="currency" class="form-control" name="currency">
@@ -45,10 +44,15 @@
                   </div>
                </div>
             </th>
-            <td><h5>{{ packages.starter.price[selected_currency.label] }} <small>{{ selected_currency.symbol }} / month</small></h5></td>
-            <td><h5>{{ packages.plus.price[selected_currency.label] }} <small>{{ selected_currency.symbol }} / month</small></h5></td>
-            <td><h5>{{ packages.premium.price[selected_currency.label] }} <small>{{ selected_currency.symbol }} / month</small></h5></td>
-            <td><h5>{{ packages.enterprise.price[selected_currency.label] }} <small>{{ selected_currency.symbol }} / month</small></h5></td>
+            {% for package in package_names %}
+              <td>
+                {% for currency in currencies %}
+                  <h5 class="price {{ currency.label }} {{ "hidden" if selected_currency.label != currency.label }}">
+                    {{ packages[package].price[currency.label ]}} <small>{{ currency.symbol }} / month</small>
+                  </h5>
+                {% endfor %}
+              </td>
+            {% endfor %}
          </tr>
          <tr>
             <th scope="row">
@@ -193,10 +197,14 @@
          </tr>
          <tr>
             <th scope="row"></th>
-            <td><a class="btn btn-primary" href="/packages/starter{{ query_string }}">Start trial</a></td>
-            <td><a class="btn btn-primary" href="/packages/plus{{ query_string }}">Order now</a></td>
-            <td><a class="btn btn-primary" href="/packages/premium{{ query_string }}">Order now</a></td>
-            <td><a class="btn btn-primary" href="/packages/enterprise{{ query_string }}">Order now</a></td>
+            {% for package in package_names %}
+              <td>
+                {% for currency in currencies %}
+                  <a class="order btn btn-primary {{ currency.label }} {{ "hidden" if selected_currency.label != currency.label }}"
+                    href="/packages/{{ package }}?currency={{ currency.label }}">Order now</a>
+                {% endfor %}
+              </td>
+            {% endfor %}
          </tr>
       </tbody>
    </table>

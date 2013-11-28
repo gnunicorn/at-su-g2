@@ -159,7 +159,7 @@ def show_packages():
 def show_package(package_name):
     package = config.airtime['Packages'][package_name]
     package['name'] = package_name
-    return render_template('packages/{0}.html'.format(package_name),
+    return render_template('/packages/package.html',
                            package=package,
                            extras=config.airtime['Extras'],
                            currency=_currency_data(request.args.get('currency',
