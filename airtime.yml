@@ -2,13 +2,13 @@
 Currencies:
   - label: usd
     name: "USD"
-    symbol: '$'
+    symbol: "$"
   - label: eur
     name: "Euro"
-    symbol: '€'
+    symbol: "€"
   - label: gbp
     name: "GBP"
-    symbol: '£'
+    symbol: "£"
 
 # externals APIs
 # leave empty to have it not trigger
@@ -17,28 +17,28 @@ APIs:
   paid_callback: 
 
 Packages:
-  starter:
+  - label: starter
     title: "Starter"
     description: "First month free, 10 GB Storage included"
     price:
       usd: 24.95
       eur: 1
       gbp: 2
-  plus:
+  - label: plus
     title: "Plus"
     description: "30 GB Storage included"
     price:
       usd: 49.95
       eur: 1
       gbp: 2
-  premium:
+  - label: premium
     title: "Premium"
     description: "150 GB Storage and 2 simultaneous streams with different bitrates included"
     price:
       usd: 74.95
       eur: 1
       gbp: 2
-  enterprise:
+  - label: enterprise
     title: "Enterprise"
     description: "500 GB Storage and 3 simultaneous streams with different bitrates included"
     price:

@@ -32,6 +32,10 @@ def _currency_data(currency):
     else:
         return config.airtime['Currencies'][0]
 
+def _package_data(package):
+    return filter(lambda x: x['label'] == package,
+                      config.airtime['Packages'])[0]
+
 
 def check_domain_available(domain):
     if not config.airtime["APIs"]["domain_check"]:
@@ -60,7 +64,8 @@ def require_checkout_context(func):
 @app.route("/prepare_checkout", methods=["POST"])
 def prepare_checkout():
     session["checkout_context"] = ctx = _extract_extras(request.form)
-    ctx["package"] = config.airtime['Packages'][request.form.get("package", "starter")]
+    ctx["package"] = _package_data(request.form.get("package",
+                                                    config.airtime['Packages'][0]['label']))
     ctx["currency"] = _currency_data(request.form.get('currency', None))
     return redirect(url_for("checkout"))
 
@@ -183,12 +188,10 @@ def show_packages():
                                                                             None)))
 
 
-@app.route("/packages/<string:package_name>")
-def show_package(package_name):
-    package = config.airtime['Packages'][package_name]
-    package['name'] = package_name
+@app.route("/packages/<string:package>")
+def show_package(package):
     return render_template('/packages/package.html',
-                           package=package,
+                           package=_package_data(package),
                            extras=config.airtime['Extras'],
                            currency=_currency_data(request.args.get('currency',
                                                                     None)))

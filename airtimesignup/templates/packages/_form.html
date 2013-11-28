@@ -1,5 +1,5 @@
 <form class="upgrades" method="POST" action="/prepare_checkout">
-   <input type="hidden" name="package" value="{{ package.name }}" />
+   <input type="hidden" name="package" value="{{ package.label }}" />
    <input type="hidden" name="currency" value="{{ currency.label }}" />
    {% include "packages/_upgrades.html" %}
 	<button class="pull-right btn btn-primary btn-lg">continue >> </button>

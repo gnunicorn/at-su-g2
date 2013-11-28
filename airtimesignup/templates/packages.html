@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-{% set package_names = ['starter', 'plus', 'premium', 'enterprise'] %}
 
 {% block title %}New app{% endblock %}
 
@@ -44,11 +43,11 @@
                   </div>
                </div>
             </th>
-            {% for package in package_names %}
+            {% for package in packages %}
               <td>
                 {% for currency in currencies %}
                   <h5 class="price {{ currency.label }} {{ "hidden" if selected_currency.label != currency.label }}">
-                    {{ packages[package].price[currency.label ]}} <small>{{ currency.symbol }} / month</small>
+                    {{ package.price[currency.label ]}} <small>{{ currency.symbol }} / month</small>
                   </h5>
                 {% endfor %}
               </td>
@@ -197,11 +196,11 @@
          </tr>
          <tr>
             <th scope="row"></th>
-            {% for package in package_names %}
+            {% for package in packages %}
               <td>
                 {% for currency in currencies %}
                   <a class="order btn btn-primary {{ currency.label }} {{ "hidden" if selected_currency.label != currency.label }}"
-                    href="/packages/{{ package }}?currency={{ currency.label }}">Order now</a>
+                    href="/packages/{{ package.label }}?currency={{ currency.label }}">Order now</a>
                 {% endfor %}
               </td>
             {% endfor %}
