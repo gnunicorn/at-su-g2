@@ -1,22 +1,20 @@
 
-AirtimeSignup G2 - Documentation
-==================================
+= AirtimeSignup G2 - Documentation
+
 :Author:    Benjamin Kampmann; Patricia Garcia
 :Date:      Nov 30th, 2013
 :Revision:  1
 
 
-# Setup
+== Setup
 
-## Requirements:
+=== Requirements:
  
-AirtimeSignup G2 runs on Python 2.7 and uses pip and virtualenv to manage packages. Please refer to your distributions reference to learn how to install python2.7 and pip. Once you have pip installed you can do:
+AirtimeSignup G2 runs on Python 2.7 and uses pip and virtualenv to manage packages. Please refer to your distributions reference to learn how to install python2.7 and pip. Once you have pip installed to install virtual env, please  do:
 
   pip install virtualenv
 
-To install virtualenv
-
-## Setting up
+=== Setting up
 
 Navigate to the main directory of this checkout or whereever you zipped the package and run:
 
@@ -29,9 +27,9 @@ Please make sure to run all commands prefixed "(v)$" from within the virtual env
 
 Now you have all packages installed in the virtual environment to run the app server. 
 
-## Configure the database
+=== Configure the database
 
-The database can be configured by changing the DATABASE_URL in `airtimesignup/config.y` to the desired URL. AirtimeSignup uses sqlalchemy, which supports many different SQL database backends. In order to understand what configuration is needed for your setup please refer to link::http://pythonhosted.org/Flask-SQLAlchemy/config.html.
+The database can be configured by changing the DATABASE_URL in `airtimesignup/config.y` to the desired URL. AirtimeSignup uses sqlalchemy, which supports many different SQL database backends. In order to understand what configuration is needed for your setup please refer to link:http://pythonhosted.org/Flask-SQLAlchemy/config.html[] .
 
 Once the database URL is configured please run (within your virtual environment)
  
@@ -39,30 +37,88 @@ Once the database URL is configured please run (within your virtual environment)
 
 To upgrade the schema to the latest version
 
-## Running the Dev Server
+=== Running the Dev Server
 
 If you run
 
  (v)$ python app.py
 
-you should be able to see your website at "http://127.0.0.1:5000/".
+you should be able to see your website at "link:http://127.0.0.1:5000/[]".
+
+=== Digging into the code
+
+The basic structure of the project looks like this (important ones expanded for clarity)
+
+ airtime-signup-g2
+   \ -- bin                 		<= auto generated binaries for virtual env
+   |    
+   \ -- airtimesignup       		<= source code of the actual app
+   |     \ -- templates      		<= jinja2/html templates for the app
+   |     | -- __init__.py          	<= empty stub
+   |     | -- app.py               	<= MAIN ENTRY to the App
+   |     | -- checkvat.py          	<= helper, managing VAT checking
+   |     | -- config.py            	<= configuration of the App, also loads the YAML
+   |     | -- database.py          	<= database connection helper
+   |     | -- models.py            	<= database model definitions
+   |     + -- user_management.py   	<= user management implementation
+   |
+   \ -- alembic             		<= alembic database migrations
+   |    \ -- versions       		<= each individual migration step
+   |
+   \ -- docs                		<= where you found this documentation
+   |
+   \ -- include             		<= auto generated for virtual env
+   |
+   \ -- lib                 		<= auto generated: libs and packgeds used
+   |
+   \ -- static              		<= static files served by the App
+   |    \ -- css            		<= CSS Stylesheets
+   |          \ -- img                  <= CSS specific images
+   |          \ -- sass                 <= sass source getting compiled to CSS
+   |    \ -- fonts          		<= custom Fonts used
+   |    \ -- img            		<= images
+   |    \ -- js             		<= Javascript files
+   |
+   | -- airtime.yml         		<= Package and Callback configuration
+   | -- alembic.ini         		<= Configuration for Alembic Database Migrations
+   | -- app.py         		        <= airtimesignup/app.py wrapper
+   | -- config.rb         		<= Compass/Sass configuration
+   | -- requirements.txt                <= Python libs required to build and run the project
+
+As you can see the main entry point (and file with the most code) is `airtimesignup/app.py`.
 
 # Deployment
 
-## for
+This app is build using flask. Any of the link:http://flask.pocoo.org/docs/deploying/wsgi-standalone/[here mentioned] ways can be used to run a deployment services. Don't forget to disable "DEBUG"-mode in airtimesignup/config.py
 
-## Technical configuration
 
-## Pricing configuration
+=== Technical configuration
+
+Is done through `airtimesignup/config.py` and requires the app to be restarted after every change. It is a simple Python Configuration format. Specifically you can configure:
+
+
+ * DEBUG: whether the app shall run in debug mode, giving full tracebacks and debugging console on errors. Can be either `True` or `False`. Default: `False`
+ * DATABASE_URL: The database to connect to. See link:http://pythonhosted.org/Flask-SQLAlchemy/config.html[].  Default: "sqlite:///test.db"
+ * SESSION_SECRET: please put a random secret here to be used to encrypt session cookies
+ * PAYMENT_URL: the target url to the payment provider to forward the user to. Put curly brakets to identify where to put the callback url. Default: "/payment/fake?callback={}"
+
+=== Pricing configuration
 
 happens through the airtime.yml config file
 
 
+=== Callback configuration
 
-## Troubleshooting:
+As of now, there are two major callback to be called and both are configured through the `airtime.yaml` configuration file in the "APIs" section:
+
+ - domain_check: is a full-url send a get request to with the curly brakets being replaced with the check for the domain. Expects to receive a JSON as response in which "available" is either true or false (see app.py Line 40 following). If not given, no request is made and all domains are accepted
+ - paid_callback: a url to post the full JSON data of that transfer to once the payment has been done. If not given, no call is made. See app.py Line 163 following for details.
 
 
-### When running `python app.py` it fails with a Traceback
+=== Troubleshooting:
+
+
+==== When running `python app.py` it fails with a "no module named flask"
 
 If you see this
 
@@ -75,9 +131,10 @@ If you see this
 
 when running the app, it means your virtual environment has not been configured properly. Make sure you are running it from within the virtual environment by running `source bin/activate` and if it still doesn't work, re-run `pip install -r requirements.txt`.
 
-# References:
+== References:
 
 Airtime Signup G2 uses:
+
  * Flask for Web Handling: http://flask.pocoo.org/
  * SQLAlchemy for Database Access: http://docs.sqlalchemy.org/en/rel_0_8/
  * Alembic for Database migrations: https://alembic.readthedocs.org/en/latest/index.html
