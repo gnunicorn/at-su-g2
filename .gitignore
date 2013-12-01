@@ -6,3 +6,5 @@ lib
 .DS_Store
 test.db
 .sass-cache/
+docs/*.html
+docs/*.pdf
