@@ -1,6 +1,85 @@
 
-Airtime Signup G2 - Documentation
+AirtimeSignup G2 - Documentation
 ==================================
 :Author:    Benjamin Kampmann; Patricia Garcia
 :Date:      Nov 30th, 2013
 :Revision:  1
+
+
+# Setup
+
+## Requirements:
+ 
+AirtimeSignup G2 runs on Python 2.7 and uses pip and virtualenv to manage packages. Please refer to your distributions reference to learn how to install python2.7 and pip. Once you have pip installed you can do:
+
+  pip install virtualenv
+
+To install virtualenv
+
+## Setting up
+
+Navigate to the main directory of this checkout or whereever you zipped the package and run:
+
+
+ virtualenv .
+ source bin/activate
+ (v)$ pip install -r requirements.txt
+
+Please make sure to run all commands prefixed "(v)$" from within the virtual environment .
+
+Now you have all packages installed in the virtual environment to run the app server. 
+
+## Configure the database
+
+The database can be configured by changing the DATABASE_URL in `airtimesignup/config.y` to the desired URL. AirtimeSignup uses sqlalchemy, which supports many different SQL database backends. In order to understand what configuration is needed for your setup please refer to link::http://pythonhosted.org/Flask-SQLAlchemy/config.html.
+
+Once the database URL is configured please run (within your virtual environment)
+ 
+ (v)$ alembic upgrade head
+
+To upgrade the schema to the latest version
+
+## Running the Dev Server
+
+If you run
+
+ (v)$ python app.py
+
+you should be able to see your website at "http://127.0.0.1:5000/".
+
+# Deployment
+
+## for
+
+## Technical configuration
+
+## Pricing configuration
+
+happens through the airtime.yml config file
+
+
+
+## Troubleshooting:
+
+
+### When running `python app.py` it fails with a Traceback
+
+If you see this
+
+	Traceback (most recent call last):
+	  File "app.py", line 1, in <module>
+	    from airtimesignup.app import app
+	  File "/Users/benjaminkampmann/dev/airtime-signup-g2/airtimesignup/app.py", line 2, in <module>
+	    from flask import (Flask, render_template, jsonify, request,
+	ImportError: No module named flask
+
+when running the app, it means your virtual environment has not been configured properly. Make sure you are running it from within the virtual environment by running `source bin/activate` and if it still doesn't work, re-run `pip install -r requirements.txt`.
+
+# References:
+
+Airtime Signup G2 uses:
+ * Flask for Web Handling: http://flask.pocoo.org/
+ * SQLAlchemy for Database Access: http://docs.sqlalchemy.org/en/rel_0_8/
+ * Alembic for Database migrations: https://alembic.readthedocs.org/en/latest/index.html
+ * Twitter Bootstrap as UI-Framework: http://getbootstrap.com/
+ * with jQuery for Interaction: http://api.jquery.com/
