@@ -19,9 +19,9 @@ app = Flask(__name__, static_folder='../static')
 
 
 ## HELPER FUNCTIONS
-def _extract_extras(context):
+def _extract_upgrades(context):
     upgrades = {}
-    for index, data in enumerate(config.airtime["Extras"]):
+    for index, data in enumerate(config.airtime["Upgrades"]):
         if str(index) in context:
             upgrade = data
             upgrade["selected_option"] = data["options"][int(context[str(index)])]
@@ -42,11 +42,11 @@ def _package_data(package):
 def _total_price(cart):
     total = cart["package"]["price"][cart["currency"]["label"]]
     total += sum([data["selected_option"]["price"][cart["currency"]["label"]]
-                    for name, data in cart["extras"].items()])
+                    for name, data in cart["upgrades"].items()])
     return total
 
 def _upgrade_names():
-    return [upgrade["label"] for upgrade in config.airtime['Extras']]
+    return [upgrade["label"] for upgrade in config.airtime['Upgrades']]
 
 def check_domain_available(domain):
     if not config.airtime["APIs"]["domain_check"]:
@@ -75,7 +75,7 @@ def require_checkout_context(func):
 @app.route("/prepare_checkout", methods=["POST"])
 def prepare_checkout():
     session["checkout_context"] = ctx = {}
-    ctx["extras"] = _extract_extras(request.form)
+    ctx["upgrades"] = _extract_upgrades(request.form)
 
     ctx["package"] = _package_data(request.form.get("package",
                                                     config.airtime['Packages'][0]['label']))
@@ -203,7 +203,7 @@ def show_packages():
 def show_package(package):
     return render_template('/packages/package.html',
                            package=_package_data(package),
-                           extras=config.airtime['Extras'],
+                           upgrades=config.airtime['Upgrades'],
                            currency=_currency_data(request.args.get('currency',
                                                                     None)))
 

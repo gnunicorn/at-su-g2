@@ -46,7 +46,7 @@ Packages:
       eur: 1
       gbp: 2
 
-Extras:
+Upgrades:
   - label: extra_storage
     title: "Extra Storage"
     description: "Storage (GB)"
