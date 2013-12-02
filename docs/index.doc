@@ -37,6 +37,24 @@ Once the database URL is configured please run (within your virtual environment)
 
 To upgrade the schema to the latest version
 
+=== Compass setting up and use:
+
+A Ruby installation is required to use compass, please follow the instructions in link:https://www.ruby-lang.org/en/downloads/[].
+
+Then install compass as explained in link:http://compass-style.org/install/[].
+
+
+Compass allows to write cleaner css files, using sass syntax (link:http://sass-lang.com/[]) and to avoid the need of browser specific prefixes through the use of mixins. See more in link:http://compass-style.org/[].
+
+
+To use compass write your styles in the '.scss' files contained in /static/css/sass/ folder.
+
+Then run 
+
+   $ compass watch
+   
+and the '.css' files will be generated automatically whenever a '.scss' file changes. 
+   
 === Running the Dev Server
 
 If you run
@@ -104,7 +122,91 @@ Is done through `airtimesignup/config.py` and requires the app to be restarted a
 
 === Pricing configuration
 
-happens through the airtime.yml config file
+It happens through the airtime.yml config file. There are three sections for pricing configuration (respect the indentation!):
+
+Currencies:
+^^^^^^^^^^^
+Add here new currencies, they'll be automatically shown in the currency dropdown in the select package page (the order is preserved). You have to provide information for the following fields:
+
+* label: the label to identify the currency in the database. It has to be a single word, if you want to use more than one word use '_' to separate them.
+* name: the name of the currency for display in the currency dropdown.
+* symbol: symbol identifying the currency, use for display in every page in the application.
+
+Note: the first currency provided is considered the default one.
+
+Example:
+
+   Currencies:
+     - label: usd
+       name: "USD"
+       symbol: "$"
+     - label: eur
+       name: "Euro"
+       symbol: "€"
+
+
+Packages:
+^^^^^^^^^
+The available packages. The fields to be provided are:
+
+   * label: again label to identify package in the database and in the json provided by the application when checkout completed (single word, no spaces).
+   * title: the actual name of the package to be displayed in the different pages.
+   * description: a description of the package, to be shown in the package page. You can include some html tags in this description (if for example you want to emphasize some part of it).
+   * price: the price field contains one field which each of the currencies defined in the "Currencies" section, in the form "currency" (the currency label as provided in the "Currencies" section): "price". Make sure to use the proper notation for the price (use '.' not ',' for decimals).
+
+Example:
+   
+   Packages:
+     - label: starter
+       title: "Starter"
+       description: "First month free, 10 GB Storage included"
+       price:
+         usd: 24.95
+         eur: 1
+         gbp: 2
+     - label: plus
+       title: "Plus"
+       description: "30 GB Storage included"
+       price:
+         usd: 49.95
+         eur: 1
+         gbp: 2
+   
+
+Upgrades:
+^^^^^^^^^
+Includes all the information relative to available upgrades and options. New upgrades will be added to the package page automatically, the order is preserved. The fields to be provided are:
+
+* label: as before, the label to identify the upgrade in the database and order checkout json (single word, no spaces).
+* title: the name of the upgrade.
+* description: information about the upgrade. You can use some html tags inside it.
+* options: the different options available for the upgrade. Contains:
+   ** label: the upgrade option is also represented by a label (single word, no spaces).
+   ** title: name of the option.
+   ** description: explanation about the option, can contain html.
+   ** price: same as for packages (include different field for different currencies).
+
+Example:
+
+   Upgrades:
+     - label: extra_storage
+       title: "Extra Storage"
+       description: "Storage (GB)"
+       options:
+         - label: silver
+           title: "Silver"
+           description: "5 GB"
+           price:
+             usd: 4.99
+             eur: 1
+             gbp: 2
+         - label: gold
+           title: "Gold"
+           description: "50 GB"
+           price:
+             usd: 39.99
+             eur: 1
+             gbp: 2
 
 
 === Callback configuration
