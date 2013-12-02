@@ -124,8 +124,8 @@ Is done through `airtimesignup/config.py` and requires the app to be restarted a
 
 It happens through the airtime.yml config file. There are three sections for pricing configuration (respect the indentation!):
 
-Currencies:
-^^^^^^^^^^^
+=== Currencies:
+
 Add here new currencies, they'll be automatically shown in the currency dropdown in the select package page (the order is preserved). You have to provide information for the following fields:
 
 * label: the label to identify the currency in the database. It has to be a single word, if you want to use more than one word use '_' to separate them.
@@ -145,8 +145,8 @@ Example:
        symbol: "€"
 
 
-Packages:
-^^^^^^^^^
+=== Packages:
+
 The available packages. The fields to be provided are:
 
    * label: again label to identify package in the database and in the json provided by the application when checkout completed (single word, no spaces).
@@ -173,8 +173,8 @@ Example:
          gbp: 2
    
 
-Upgrades:
-^^^^^^^^^
+=== Upgrades:
+
 Includes all the information relative to available upgrades and options. New upgrades will be added to the package page automatically, the order is preserved. The fields to be provided are:
 
 * label: as before, the label to identify the upgrade in the database and order checkout json (single word, no spaces).
