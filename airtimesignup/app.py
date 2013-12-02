@@ -20,10 +20,13 @@ app = Flask(__name__, static_folder='../static')
 
 ## HELPER FUNCTIONS
 def _extract_extras(context):
-    return dict([(key, config.airtime["Extras"][key]['options'][int(context[key])])
-                 for key in config.airtime["Extras"].keys()
-                 if key in context])
-
+    upgrades = {}
+    for index, data in enumerate(config.airtime["Extras"]):
+        if str(index) in context:
+            upgrade = data
+            upgrade["selected_option"] = data["options"][int(context[str(index)])]
+            upgrades[upgrade["label"]] = upgrade
+    return upgrades
 
 def _currency_data(currency):
     if currency:
@@ -36,6 +39,14 @@ def _package_data(package):
     return filter(lambda x: x['label'] == package,
                       config.airtime['Packages'])[0]
 
+def _total_price(cart):
+    total = cart["package"]["price"][cart["currency"]["label"]]
+    total += sum([data["selected_option"]["price"][cart["currency"]["label"]]
+                    for name, data in cart["extras"].items()])
+    return total
+
+def _upgrade_names():
+    return [upgrade["label"] for upgrade in config.airtime['Extras']]
 
 def check_domain_available(domain):
     if not config.airtime["APIs"]["domain_check"]:
@@ -63,7 +74,9 @@ def require_checkout_context(func):
 
 @app.route("/prepare_checkout", methods=["POST"])
 def prepare_checkout():
-    session["checkout_context"] = ctx = _extract_extras(request.form)
+    session["checkout_context"] = ctx = {}
+    ctx["extras"] = _extract_extras(request.form)
+
     ctx["package"] = _package_data(request.form.get("package",
                                                     config.airtime['Packages'][0]['label']))
     ctx["currency"] = _currency_data(request.form.get('currency', None))
@@ -73,13 +86,12 @@ def prepare_checkout():
 @app.route("/checkout", methods=['GET'])
 @require_checkout_context
 def checkout():
-    context = dict(session["checkout_context"])
-    keys = filter(lambda x: "price" in context[x], context.keys())
-    total = sum([context[x]["price"][context["currency"]["label"]] for x in keys])
+    context = session["checkout_context"]
+    total = _total_price(context)
     context["sum_total"] = total
     context["vat"] = math.ceil(total * 19) / 100.0
     context["total"] = math.ceil(total * 119) / 100.0
-    return render_template('checkout.html', **context)
+    return render_template('checkout.html', upgrade_names=_upgrade_names(), **context)
 
 
 @app.route("/confirm", methods=['POST'])
@@ -109,10 +121,8 @@ def confirm():
         return redirect(url_for(".checkout"))
 
     ctx = session["checkout_context"]
-    currency = ctx["currency"]
 
-    keys = filter(lambda x: "price" in ctx[x], ctx.keys())
-    sum_total = sum([ctx[x]["price"][currency["label"]] for x in keys])
+    sum_total = _total_price(ctx)
     if order.vat_addr:
         order.total = sum_total
     else:
@@ -123,7 +133,8 @@ def confirm():
     db_session.add(order)
     db_session.commit()
 
-    return render_template("confirm.html", sum_total=sum_total, order=order, **ctx)
+    return render_template("confirm.html", order=order,
+                           upgrade_names=_upgrade_names(), **ctx)
 
 
 @app.route("/payment", methods=['POST'])
@@ -169,7 +180,7 @@ def payment_callback(payment_id):
                               {'Content-Type': 'application/json'})
         urllib2.urlopen(req).read()
 
-    return render_template("end_confirm.html", order=order, **details)    
+    return render_template("end_confirm.html", upgrade_names=_upgrade_names(), order=order, **details)
 
 
 

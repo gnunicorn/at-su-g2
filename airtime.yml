@@ -47,205 +47,205 @@ Packages:
       gbp: 2
 
 Extras:
-  extra_storage:
+  - label: extra_storage
     title: "Extra Storage"
     description: "Storage (GB)"
     options:
-      - name: silver
+      - label: silver
         title: "Silver"
         description: "5 GB"
         price:
           usd: 4.99
           eur: 1
           gbp: 2
-      - name: gold
+      - label: gold
         title: "Gold"
         description: "50 GB"
         price:
           usd: 39.99
           eur: 1
           gbp: 2
-      - name: platinum
+      - label: platinum
         title: "Platinum"
         description: "100 GB"
         price:
           usd: 69.99
           eur: 1
           gbp: 2
-  extra_listeners:
+  - label: extra_listeners
     title: "Simultaneous listeners"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: silver
+      - label: silver
         title: "Silver"
         description: "25 listeners"
         price:
           usd: 9
           eur: 1
           gbp: 2
-      - name: gold
+      - label: gold
         title: "Gold"
         description: "50 listeners"
         price:
           usd: 14.99
           eur: 1
           gbp: 2
-      - name: platinum
+      - label: platinum
         title: "Platinum"
         description: "100 listeners"
         price:
           usd: 24.99
           eur: 1
           gbp: 2
-  boost:
+  - label: boost
     title: "Boost"
     description: "1 peek per week"
     options:
-      - name: silver
+      - label: silver
         title: "Silver"
         description: "250"
         price:
           usd: 14.99
           eur: 1
           gbp: 2
-      - name: gold
+      - label: gold
         title: "Gold"
         description: "500"
         price:
           usd: 24.99
           eur: 1
           gbp: 2
-      - name: platinum
+      - label: platinum
         title: "Platinum"
         description: "1000"
         price:
           usd: 39.99
           eur: 1
           gbp: 2
-  stream:
+  - label: stream
     title: "Stream"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: silver
+      - label: silver
         title: "Silver"
         description: "1"
         price:
           usd: 9
           eur: 1
           gbp: 2
-      - name: gold
+      - label: gold
         title: "Gold"
         description: "2"
         price:
           usd: 14.99
           eur: 1
           gbp: 2
-  quality:
+  - label: quality
     title: "Quality"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: silver
+      - label: silver
         title: "Silver"
         description: "165"
         price:
           usd: 9
           eur: 1
           gbp: 2
-      - name: gold
+      - label: gold
         title: "Gold"
         description: "192"
         price:
           usd: 14.99
           eur: 1
           gbp: 2
-      - name: platinum
+      - label: platinum
         title: "Platinum"
         description: "320"
         price:
           usd: 24.99
           eur: 1
           gbp: 2
-  sla:
+  - label: sla
     title: "SLA"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: sla
+      - label: sla
         title: "SLA"
         description: ""
         price:
           usd: 99
           eur: 1
           gbp: 2
-  sandbox:
+  - label: sandbox
     title: "Sandbox"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: sandbox
+      - label: sandbox
         title: "Sandbox"
         description: ""
         price:
           usd: 29
           eur: 1
           gbp: 2
-  external_streaming:
+  - label: external_streaming
     title: "External Streaming Enabled"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: external_streaming
+      - label: external_streaming
         title: "External Streaming Enabled"
         description: ""
         price:
           usd: 99
           eur: 1
           gbp: 2
-  broadcaster_theme:
+  - label: broadcaster_theme
     title: "Broadcaster Theme"
     description: "Take it as it is, including hosting to 75000 visitors monthly max"
     options:
-      - name: broadcaster_theme
+      - label: broadcaster_theme
         title: "Broadcaster Theme"
         description: ""
         price:
           usd: 49
           eur: 1
           gbp: 2
-  expert_support:
+  - label: expert_support
     title: "Expert Support"
     description: "Here you can add some text long or short explaining what the upgrade is all about. You can also use html tags inside the text"
     options:
-      - name: extra_hours
+      - label: extra_hours
         title: "Extra Hours"
         description: ""
         price:
           usd: 1
           eur: 1
           gbp: 2
-      - name: training
+      - label: training
         title: "Training"
         description: ""
         price:
           usd: 1
           eur: 1
           gbp: 2
-      - name: workshop
+      - label: workshop
         title: "Workshop"
         description: ""
         price:
           usd: 1
           eur: 1
           gbp: 2
-      - name: developer_time
+      - label: developer_time
         title: "Developer Time"
         description: ""
         price:
           usd: 1
           eur: 1
           gbp: 2
-  only_hosting:
+  - label: only_hosting
     title: "Hosting"
     description: "Only hosting instance with basic support (live chat during business hours, access to ticket system)"
     options:
-      - name: only_hosting
+      - label: only_hosting
         title: "Only hosting"
         description: ""
         price:
