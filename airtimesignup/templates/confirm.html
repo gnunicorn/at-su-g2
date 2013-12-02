@@ -20,11 +20,11 @@
 
     <hr>
     <p>
-      SUM: {{sum_total}} {{ currency.symbol }}/m<br>
+      SUM: {{ "%0.2f" % sum_total|float }} {{ currency.symbol }}/m<br>
     	{% if order.vat %}
-	       VAT: {{order.vat}} {{ currency.symbol }}/m<br>
+	       VAT: {{ "%0.2f" % order.vat|float }} {{ currency.symbol }}/m<br>
         {% endif %}
-	    TOTAL: {{order.total}} {{ currency.symbol }}/m<br>
+	    TOTAL: {{ "%0.2f" % order.total|float }} {{ currency.symbol }}/m<br>
     </p>
 
     <h2>For domain</h2>

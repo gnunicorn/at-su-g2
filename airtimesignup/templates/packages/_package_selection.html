@@ -1,7 +1,7 @@
-<h3>{{ package.title }} - {{ package.price[currency.label] }} {{ currency.symbol }}/m <a href="/packages">change</a></h3>
+<h3>{{ package.title }} - {{ "%0.2f" % package.price[currency.label]|float }} {{ currency.symbol }}/m <a href="/packages">change</a></h3>
 
 {% for name in upgrade_names %}
    {% if upgrades[name] %}
-      <h3>+ {{ upgrades[name].title|safe }}: {{ upgrades[name].selected_option.title|safe }} ({{ upgrades[name].selected_option.description|safe }}) - {{ upgrades[name].selected_option.price[currency.label] }} {{ currency.symbol }}/m</h3>
+      <h3>+ {{ upgrades[name].title|safe }}: {{ upgrades[name].selected_option.title|safe }} ({{ upgrades[name].selected_option.description|safe }}) - {{ "%0.2f" % upgrades[name].selected_option.price[currency.label]|float }} {{ currency.symbol }}/m</h3>
    {% endif %}
 {% endfor %}

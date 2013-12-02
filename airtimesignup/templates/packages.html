@@ -47,7 +47,7 @@
               <td>
                 {% for currency in currencies %}
                   <h5 class="price {{ currency.label }} {{ "hidden" if selected_currency.label != currency.label }}">
-                    {{ package.price[currency.label ]}} <small>{{ currency.symbol }} / month</small>
+                    {{ "%0.2f" % package.price[currency.label]|float }} <small>{{ currency.symbol }} / month</small>
                   </h5>
                 {% endfor %}
               </td>
