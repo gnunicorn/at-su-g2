@@ -123,11 +123,12 @@ def confirm():
     ctx = session["checkout_context"]
 
     sum_total = _total_price(ctx)
+    order.currency = ctx["currency"]["label"]
     if order.vat_addr:
         order.total = sum_total
     else:
-        order.vat = math.ceil(sum_total * 19) / 100.0
-        order.total = sum_total + order.vat
+        order.total_vat = math.ceil(sum_total * 19) / 100.0
+        order.total = sum_total + order.total_vat
 
     order.details = json.dumps(ctx)
     db_session.add(order)
