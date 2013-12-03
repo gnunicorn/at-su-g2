@@ -6,15 +6,16 @@
 :Revision:  1
 
 
-== Setup
+<<<
 
-=== Requirements:
+
+== Requirements:
  
 AirtimeSignup G2 runs on Python 2.7 and uses pip and virtualenv to manage packages. Please refer to your distributions reference to learn how to install python2.7 and pip. Once you have pip installed to install virtual env, please  do:
 
   pip install virtualenv
 
-=== Setting up
+== Setup
 
 Navigate to the main directory of this checkout or whereever you zipped the package and run:
 
@@ -37,80 +38,13 @@ Once the database URL is configured please run (within your virtual environment)
 
 To upgrade the schema to the latest version
 
-=== Compass setting up and use:
-
-A Ruby installation is required to use compass, please follow the instructions in link:https://www.ruby-lang.org/en/downloads/[].
-
-Then install compass as explained in link:http://compass-style.org/install/[].
-
-
-Compass allows to write cleaner css files, using sass syntax (link:http://sass-lang.com/[]) and to avoid the need of browser specific prefixes through the use of mixins. See more in link:http://compass-style.org/[].
-
-
-To use compass write your styles in the '.scss' files contained in /static/css/sass/ folder.
-
-Then run 
-
-   $ compass watch
-   
-and the '.css' files will be generated automatically whenever a '.scss' file changes. 
-   
-=== Running the Dev Server
-
-If you run
-
- (v)$ python app.py
-
-you should be able to see your website at "link:http://127.0.0.1:5000/[]".
-
-=== Digging into the code
-
-The basic structure of the project looks like this (important ones expanded for clarity)
-
- airtime-signup-g2
-   \ -- bin                 		<= auto generated binaries for virtual env
-   |    
-   \ -- airtimesignup       		<= source code of the actual app
-   |     \ -- templates      		<= jinja2/html templates for the app
-   |     | -- __init__.py          	<= empty stub
-   |     | -- app.py               	<= MAIN ENTRY to the App
-   |     | -- checkvat.py          	<= helper, managing VAT checking
-   |     | -- config.py            	<= configuration of the App, also loads the YAML
-   |     | -- database.py          	<= database connection helper
-   |     | -- models.py            	<= database model definitions
-   |     + -- user_management.py   	<= user management implementation
-   |
-   \ -- alembic             		<= alembic database migrations
-   |    \ -- versions       		<= each individual migration step
-   |
-   \ -- docs                		<= where you found this documentation
-   |
-   \ -- include             		<= auto generated for virtual env
-   |
-   \ -- lib                 		<= auto generated: libs and packgeds used
-   |
-   \ -- static              		<= static files served by the App
-   |    \ -- css            		<= CSS Stylesheets
-   |          \ -- img                  <= CSS specific images
-   |          \ -- sass                 <= sass source getting compiled to CSS
-   |    \ -- fonts          		<= custom Fonts used
-   |    \ -- img            		<= images
-   |    \ -- js             		<= Javascript files
-   |
-   | -- airtime.yml         		<= Package and Callback configuration
-   | -- alembic.ini         		<= Configuration for Alembic Database Migrations
-   | -- app.py         		        <= airtimesignup/app.py wrapper
-   | -- config.rb         		<= Compass/Sass configuration
-   | -- requirements.txt                <= Python libs required to build and run the project
-
-As you can see the main entry point (and file with the most code) is `airtimesignup/app.py`.
-
-# Deployment
+=== Deployment
 
 This app is build using flask. Any of the link:http://flask.pocoo.org/docs/deploying/wsgi-standalone/[here mentioned] ways can be used to run a deployment services. Don't forget to disable "DEBUG"-mode in airtimesignup/config.py
 
+<<<
 
-=== Technical configuration
+== Technical configuration
 
 Is done through `airtimesignup/config.py` and requires the app to be restarted after every change. It is a simple Python Configuration format. Specifically you can configure:
 
@@ -120,7 +54,9 @@ Is done through `airtimesignup/config.py` and requires the app to be restarted a
  * SESSION_SECRET: please put a random secret here to be used to encrypt session cookies
  * PAYMENT_URL: the target url to the payment provider to forward the user to. Put curly brakets to identify where to put the callback url. Default: "/payment/fake?callback={}"
 
-=== Pricing configuration
+<<<
+
+== Pricing configuration
 
 It happens through the airtime.yml config file. There are three sections for pricing configuration (respect the indentation!):
 
@@ -144,6 +80,7 @@ Example:
        name: "Euro"
        symbol: "€"
 
+<<<
 
 === Packages:
 
@@ -172,6 +109,7 @@ Example:
          eur: 1
          gbp: 2
    
+<<<
 
 === Upgrades:
 
@@ -209,18 +147,97 @@ Example:
              gbp: 2
 
 
-=== Callback configuration
+<<<
+
+== Callback configuration
 
 As of now, there are two major callback to be called and both are configured through the `airtime.yaml` configuration file in the "APIs" section:
 
  - domain_check: is a full-url send a get request to with the curly brakets being replaced with the check for the domain. Expects to receive a JSON as response in which "available" is either true or false (see app.py Line 40 following). If not given, no request is made and all domains are accepted
  - paid_callback: a url to post the full JSON data of that transfer to once the payment has been done. If not given, no call is made. See app.py Line 163 following for details.
 
+<<<
 
-=== Troubleshooting:
+== Development
+
+=== Running the Dev Server
+
+If you run
+
+ (v)$ python app.py
+
+you should be able to see your website at "link:http://127.0.0.1:5000/[]".
 
 
-==== When running `python app.py` it fails with a "no module named flask"
+=== Compass setting up and use:
+
+A Ruby installation is required to use compass, please follow the instructions in link:https://www.ruby-lang.org/en/downloads/[].
+
+Then install compass as explained in link:http://compass-style.org/install/[].
+
+
+Compass allows to write cleaner css files, using sass syntax (link:http://sass-lang.com/[]) and to avoid the need of browser specific prefixes through the use of mixins. See more in link:http://compass-style.org/[].
+
+
+To use compass write your styles in the '.scss' files contained in /static/css/sass/ folder.
+
+Then run 
+
+   $ compass watch
+   
+and the '.css' files will be generated automatically whenever a '.scss' file changes. 
+   
+
+<<<
+
+=== Digging into the code
+
+The basic structure of the project looks like this (important ones expanded for clarity)
+
+ airtime-signup-g2
+   \ -- bin                     <= auto generated binaries for virtual env
+   |    
+   \ -- airtimesignup           <= source code of the actual app
+   |     \ -- templates         <= jinja2/html templates for the app
+   |     | -- __init__.py           <= empty stub
+   |     | -- app.py                <= MAIN ENTRY to the App
+   |     | -- checkvat.py           <= helper, managing VAT checking
+   |     | -- config.py             <= configuration of the App, also loads the YAML
+   |     | -- database.py           <= database connection helper
+   |     | -- models.py             <= database model definitions
+   |     + -- user_management.py    <= user management implementation
+   |
+   \ -- alembic                 <= alembic database migrations
+   |    \ -- versions           <= each individual migration step
+   |
+   \ -- docs                    <= where you found this documentation
+   |
+   \ -- include                 <= auto generated for virtual env
+   |
+   \ -- lib                     <= auto generated: libs and packgeds used
+   |
+   \ -- static                  <= static files served by the App
+   |    \ -- css                <= CSS Stylesheets
+   |          \ -- img                  <= CSS specific images
+   |          \ -- sass                 <= sass source getting compiled to CSS
+   |    \ -- fonts              <= custom Fonts used
+   |    \ -- img                <= images
+   |    \ -- js                 <= Javascript files
+   |
+   | -- airtime.yml             <= Package and Callback configuration
+   | -- alembic.ini             <= Configuration for Alembic Database Migrations
+   | -- app.py                    <= airtimesignup/app.py wrapper
+   | -- config.rb             <= Compass/Sass configuration
+   | -- requirements.txt                <= Python libs required to build and run the project
+
+As you can see the main entry point (and file with the most code) is `airtimesignup/app.py`.
+
+<<<
+
+== Troubleshooting:
+
+
+=== When running `python app.py` it fails with a "no module named flask"
 
 If you see this
 
